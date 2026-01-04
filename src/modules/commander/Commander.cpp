@@ -966,7 +966,7 @@ Commander::handle_command(const vehicle_command_s &cmd)
 									arm_disarm_reason_t::command_internal;
 
 				if (arming_action == vehicle_command_s::ARMING_ACTION_ARM) {
-					arming_res = arm(arm_disarm_reason, cmd.from_external || !forced);
+					arming_res = arm(arm_disarm_reason, !forced);
 
 				} else if (arming_action == vehicle_command_s::ARMING_ACTION_DISARM) {
 					arming_res = disarm(arm_disarm_reason, forced);

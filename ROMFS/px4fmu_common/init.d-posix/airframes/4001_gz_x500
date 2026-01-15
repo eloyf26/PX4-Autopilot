@@ -13,6 +13,11 @@ PX4_SIM_MODEL=${PX4_SIM_MODEL:=x500}
 
 param set-default SIM_GZ_EN 1
 
+# Disable UXRCE-DDS timestamp synchronization for Gazebo simulation
+# This keeps PX4 timestamps in raw sim time (same domain as ROS2 /clock)
+# Required because use_sim_time:=true expects sim time, not epoch time
+param set-default UXRCE_DDS_SYNCT 0
+
 param set-default CA_AIRFRAME 0
 param set-default CA_ROTOR_COUNT 4
 

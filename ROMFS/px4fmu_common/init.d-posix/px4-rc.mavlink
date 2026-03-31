@@ -31,6 +31,13 @@ mavlink start -x -u $udp_onboard_payload_port_local -r 4000 -f -m onboard -o $ud
 # Onboard link to gimbal
 mavlink start -x -u $udp_onboard_gimbal_port_local -r 400000 -f -m gimbal -o $udp_onboard_gimbal_port_remote
 
+# Extra MAVLink stream for fake radar (if configured via env var)
+if [ -n "$PX4_MAVLINK_RADAR_PORT" ]; then
+	udp_radar_port_local=$((19570+px4_instance))
+	mavlink start -x -u $udp_radar_port_local -r 4000 -f -o $PX4_MAVLINK_RADAR_PORT
+	mavlink stream -r 10 -s GLOBAL_POSITION_INT -u $udp_radar_port_local
+fi
+
 # To display for SIH sitl
 if [ "$PX4_SIMULATOR" = "sihsim" ]; then
 	udp_sihsim_port_local=$((19450+px4_instance))

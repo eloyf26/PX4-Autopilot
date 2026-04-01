@@ -38,6 +38,15 @@ if [ -n "$PX4_MAVLINK_RADAR_PORT" ]; then
 	mavlink stream -r 10 -s GLOBAL_POSITION_INT -u $udp_radar_port_local
 fi
 
+# Extra MAVLink stream for fake pod (if configured via env var)
+# Bidirectional: FakePodDBXClient sends ARM/RTL commands back through this link.
+if [ -n "$PX4_MAVLINK_POD_PORT" ]; then
+	udp_pod_port_local=$((19580+px4_instance))
+	mavlink start -x -u $udp_pod_port_local -r 4000000 -f -o $PX4_MAVLINK_POD_PORT
+	mavlink stream -r 50 -s GLOBAL_POSITION_INT -u $udp_pod_port_local
+	mavlink stream -r 50 -s ATTITUDE -u $udp_pod_port_local
+fi
+
 # To display for SIH sitl
 if [ "$PX4_SIMULATOR" = "sihsim" ]; then
 	udp_sihsim_port_local=$((19450+px4_instance))

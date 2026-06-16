@@ -334,6 +334,26 @@ void CrsfRc::Run()
 				}
 
 				break;
+
+			case 4: {
+					debug_vect_s debug_vect;
+
+					// Magic filter: only forward debug_vect frames tagged "AB" by
+					// aimbot_node, so unrelated publishers (e.g. MAVLink DEBUG_VECT)
+					// don't leak to the radio. No fresh sample -> send nothing this
+					// cycle (don't repeat stale data).
+					if (_debug_vect_sub.update(&debug_vect)
+					    && debug_vect.name[0] == 'A' && debug_vect.name[1] == 'B') {
+						const uint8_t flags = debug_vect.name[2];
+						const uint8_t track_id = debug_vect.name[3];
+						const uint16_t u = math::constrain(roundf(debug_vect.x * 65535.f), 0.f, 65535.f);
+						const uint16_t v = math::constrain(roundf(debug_vect.y * 65535.f), 0.f, 65535.f);
+						const uint16_t depth_cm = math::constrain(roundf(debug_vect.z * 100.f), 0.f, 65535.f);
+						this->SendTelemetryAimbot(flags, track_id, u, v, depth_cm);
+					}
+
+					break;
+				}
 			}
 
 			_telemetry_update_last = _input_rc.timestamp;
@@ -486,6 +506,24 @@ bool CrsfRc::SendTelemetryFlightMode(const char *flight_mode)
 	offset += length;
 	buf[offset - 1] = 0; // ensure null-terminated string
 	WriteFrameCrc(buf, offset, length + 4);
+	return _uart->write((void *) buf, (size_t) offset);
+}
+
+bool CrsfRc::SendTelemetryAimbot(const uint8_t flags, const uint8_t track_id, const uint16_t u, const uint16_t v,
+				 const uint16_t depth_cm)
+{
+	// Halcon aimbot HUD frame. Byte contract: kept byte-for-byte identical to
+	// lib/rc/crsf.cpp::crsf_send_telemetry_aimbot (the rc_input path) and to
+	// rc_ui/phases/README.md — change all three together.
+	uint8_t buf[(uint8_t)crsf_payload_size_t::aimbot + 4];
+	int offset = 0;
+	WriteFrameHeader(buf, offset, crsf_frame_type_t::aimbot, (uint8_t)crsf_payload_size_t::aimbot);
+	write_uint8_t(buf, offset, flags);
+	write_uint8_t(buf, offset, track_id);
+	write_uint16_t(buf, offset, u);
+	write_uint16_t(buf, offset, v);
+	write_uint16_t(buf, offset, depth_cm);
+	WriteFrameCrc(buf, offset, sizeof(buf));
 	return _uart->write((void *) buf, (size_t) offset);
 }
 

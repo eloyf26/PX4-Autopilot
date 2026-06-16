@@ -15,6 +15,7 @@
 #include <lib/rc/sumd.h>
 #include <lib/rc/crsf.h>
 #include <lib/rc/ghst.hpp>
+#include <lib/rc/common_rc.h>
 
 #if defined(CONFIG_ARCH_BOARD_PX4_SITL)
 #define TEST_DATA_PATH "./test_data/"
@@ -31,6 +32,7 @@ public:
 
 private:
 	bool crsfTest();
+	bool crsfAimbotEncodeTest();
 	bool ghstTest();
 	bool dsmTest(const char *filepath, unsigned expected_chancount, unsigned expected_dropcount, unsigned chan0);
 	bool dsmTest10Ch();
@@ -45,6 +47,7 @@ private:
 bool RCTest::run_tests()
 {
 	ut_run_test(crsfTest);
+	ut_run_test(crsfAimbotEncodeTest);
 	ut_run_test(ghstTest);
 	ut_run_test(dsmTest10Ch);
 	ut_run_test(dsmTest16Ch);
@@ -139,6 +142,46 @@ bool RCTest::crsfTest()
 
 		++line_counter;
 	}
+
+	return true;
+}
+
+bool RCTest::crsfAimbotEncodeTest()
+{
+	// Validate the custom aimbot CRSF frame byte-for-byte against the shared
+	// contract (src/ros2/modules/aimbot/rc_ui/phases/README.md). This is exactly
+	// the frame Phase 0's decode.lua must mirror, so assert the wire bytes here.
+	int fds[2];
+	ut_assert("pipe created", pipe(fds) == 0);
+
+	const uint8_t flags = 0x0B;      // enabled | target_locked | in_cone
+	const uint8_t track_id = 42;
+	const uint16_t u = 0x1234;
+	const uint16_t v = 0x5678;
+	const uint16_t depth_cm = 2500;  // 0x09C4
+
+	ut_assert("frame sent", crsf_send_telemetry_aimbot(fds[1], flags, track_id, u, v, depth_cm));
+
+	uint8_t frame[12] = {};
+	ut_compare("frame length", (int)read(fds[0], frame, sizeof(frame)), (int)sizeof(frame));
+	close(fds[0]);
+	close(fds[1]);
+
+	ut_compare("sync byte", frame[0], 0xC8);
+	ut_compare("length", frame[1], 0x0A);     // payload(8) + type + crc
+	ut_compare("frame type", frame[2], 0x80);
+	ut_compare("flags", frame[3], 0x0B);
+	ut_compare("track_id", frame[4], 42);
+	ut_compare("u high byte", frame[5], 0x12); // big-endian
+	ut_compare("u low byte", frame[6], 0x34);
+	ut_compare("v high byte", frame[7], 0x56);
+	ut_compare("v low byte", frame[8], 0x78);
+	ut_compare("depth high byte", frame[9], 0x09);
+	ut_compare("depth low byte", frame[10], 0xC4);
+
+	// CRC8 DVB-S2 over type + payload (bytes 2..10), matching write_frame_crc().
+	const uint8_t expected_crc = crc8_dvb_s2_buf(frame + 2, 9);
+	ut_compare("crc8", frame[11], expected_crc);
 
 	return true;
 }

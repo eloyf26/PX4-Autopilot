@@ -131,4 +131,18 @@ __EXPORT bool crsf_send_telemetry_attitude(int uart_fd, int16_t pitch, int16_t r
  */
 __EXPORT bool crsf_send_telemetry_flight_mode(int uart_fd, const char *flight_mode);
 
+/**
+ * Send custom Halcon aimbot HUD telemetry (down-link to the radio).
+ * Byte contract: src/ros2/modules/aimbot/rc_ui/phases/README.md.
+ * @param uart_fd UART file descriptor
+ * @param flags bit0 enabled, bit1 target_locked, bit2 armed, bit3 in_cone
+ * @param track_id locked track id (0 = none)
+ * @param u forecast column, fixed-point round(forecast_u_norm * 65535)
+ * @param v forecast row, fixed-point round(forecast_v_norm * 65535)
+ * @param depth_cm predicted depth [cm]
+ * @return true on success
+ */
+__EXPORT bool crsf_send_telemetry_aimbot(int uart_fd, uint8_t flags, uint8_t track_id, uint16_t u, uint16_t v,
+		uint16_t depth_cm);
+
 __END_DECLS

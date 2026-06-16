@@ -65,6 +65,10 @@ bool CRSFTelemetry::update(const hrt_abstime &now)
 	case 3:
 		sent = send_flight_mode();
 		break;
+
+	case 4:
+		sent = send_aimbot();
+		break;
 	}
 
 	_last_update = now;
@@ -184,4 +188,28 @@ bool CRSFTelemetry::send_flight_mode()
 	}
 
 	return crsf_send_telemetry_flight_mode(_uart_fd, flight_mode);
+}
+
+bool CRSFTelemetry::send_aimbot()
+{
+	debug_vect_s debug_vect;
+
+	if (!_debug_vect_sub.update(&debug_vect)) {
+		// No fresh sample since last round-robin visit -> don't send stale.
+		return false;
+	}
+
+	// Magic filter: only forward debug_vect frames tagged "AB" by aimbot_node,
+	// so unrelated publishers (e.g. MAVLink DEBUG_VECT) don't leak to the radio.
+	if (debug_vect.name[0] != 'A' || debug_vect.name[1] != 'B') {
+		return false;
+	}
+
+	const uint8_t flags = debug_vect.name[2];
+	const uint8_t track_id = debug_vect.name[3];
+	const uint16_t u = math::constrain(roundf(debug_vect.x * 65535.f), 0.f, 65535.f);
+	const uint16_t v = math::constrain(roundf(debug_vect.y * 65535.f), 0.f, 65535.f);
+	const uint16_t depth_cm = math::constrain(roundf(debug_vect.z * 100.f), 0.f, 65535.f);
+
+	return crsf_send_telemetry_aimbot(_uart_fd, flags, track_id, u, v, depth_cm);
 }

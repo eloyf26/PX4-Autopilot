@@ -53,6 +53,7 @@
 #include <uORB/topics/vehicle_attitude.h>
 #include <uORB/topics/sensor_gps.h>
 #include <uORB/topics/vehicle_status.h>
+#include <uORB/topics/debug_vect.h>
 
 using namespace device;
 
@@ -90,6 +91,9 @@ private:
 
 	bool SendTelemetryFlightMode(const char *flight_mode);
 
+	bool SendTelemetryAimbot(const uint8_t flags, const uint8_t track_id, const uint16_t u, const uint16_t v,
+				 const uint16_t depth_cm);
+
 	Serial *_uart = nullptr; ///< UART interface to RC
 
 	char _device[20] {}; ///< device / serial port path
@@ -105,12 +109,13 @@ private:
 
 	// telemetry
 	hrt_abstime _telemetry_update_last{0};
-	static constexpr int num_data_types{4}; ///< number of different telemetry data types
+	static constexpr int num_data_types{5}; ///< number of different telemetry data types
 	int _next_type{0};
 	uORB::Subscription _battery_status_sub{ORB_ID(battery_status)};
 	uORB::Subscription _vehicle_attitude_sub{ORB_ID(vehicle_attitude)};
 	uORB::Subscription _vehicle_gps_position_sub{ORB_ID(vehicle_gps_position)};
 	uORB::Subscription _vehicle_status_sub{ORB_ID(vehicle_status)};
+	uORB::Subscription _debug_vect_sub{ORB_ID(debug_vect)};
 
 	enum class crsf_frame_type_t : uint8_t {
 		gps = 0x02,
@@ -126,7 +131,11 @@ private:
 		parameter_settings_entry = 0x2B,
 		parameter_read = 0x2C,
 		parameter_write = 0x2D,
-		command = 0x32
+		command = 0x32,
+
+		// Halcon custom: aimbot HUD down-link. 0x80 is the conventional Lua
+		// passthrough region; confirmed not to collide with the ids above.
+		aimbot = 0x80
 	};
 
 	enum class crsf_payload_size_t : uint8_t {
@@ -135,6 +144,7 @@ private:
 		link_statistics = 10,
 		rc_channels = 22, ///< 11 bits per channel * 16 channels = 22 bytes.
 		attitude = 6,
+		aimbot = 8, ///< flags(1) + track_id(1) + u(2) + v(2) + depth(2)
 	};
 
 	void WriteFrameHeader(uint8_t *buf, int &offset, const crsf_frame_type_t type, const uint8_t payload_size);

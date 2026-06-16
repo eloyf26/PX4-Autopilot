@@ -73,7 +73,11 @@ enum class crsf_frame_type_t : uint8_t {
 	parameter_settings_entry = 0x2B,
 	parameter_read = 0x2C,
 	parameter_write = 0x2D,
-	command = 0x32
+	command = 0x32,
+
+	// Thalanor custom: aimbot HUD down-link. 0x80 is the conventional Lua
+	// passthrough region; confirmed not to collide with the ids above.
+	aimbot = 0x80
 };
 
 enum class crsf_payload_size_t : uint8_t {
@@ -82,6 +86,7 @@ enum class crsf_payload_size_t : uint8_t {
 	link_statistics = 10,
 	rc_channels = 22, ///< 11 bits per channel * 16 channels = 22 bytes.
 	attitude = 6,
+	aimbot = 8, ///< flags(1) + track_id(1) + u(2) + v(2) + depth(2)
 };
 
 
@@ -474,5 +479,20 @@ bool crsf_send_telemetry_flight_mode(int uart_fd, const char *flight_mode)
 	offset += length;
 	buf[offset - 1] = 0; // ensure null-terminated string
 	write_frame_crc(buf, offset, length + 4);
+	return write(uart_fd, buf, offset) == offset;
+}
+
+bool crsf_send_telemetry_aimbot(int uart_fd, uint8_t flags, uint8_t track_id, uint16_t u, uint16_t v,
+				uint16_t depth_cm)
+{
+	uint8_t buf[(uint8_t)crsf_payload_size_t::aimbot + 4];
+	int offset = 0;
+	write_frame_header(buf, offset, crsf_frame_type_t::aimbot, (uint8_t)crsf_payload_size_t::aimbot);
+	write_uint8_t(buf, offset, flags);
+	write_uint8_t(buf, offset, track_id);
+	write_uint16_t(buf, offset, u);
+	write_uint16_t(buf, offset, v);
+	write_uint16_t(buf, offset, depth_cm);
+	write_frame_crc(buf, offset, sizeof(buf));
 	return write(uart_fd, buf, offset) == offset;
 }

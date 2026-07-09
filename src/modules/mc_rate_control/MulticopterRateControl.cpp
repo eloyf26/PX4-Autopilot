@@ -219,6 +219,21 @@ MulticopterRateControl::Run()
 			Vector3f torque_setpoint =
 				_rate_control.update(rates, _rates_setpoint, angular_accel, dt, _maybe_landed || _landed);
 
+			// CG-offset (top-heavy airframe) feedforward: cancel the destabilizing
+			// gravity torque m*g*h*sin(angle) of a CG that sits above the rotor plane
+			// directly, instead of leaving the reactive rate/attitude PID loop to fight
+			// it purely after the fact. No-op (MC_CGFF_K==0) for airframes with a
+			// nominal CG. See MC_CGFF_K doc in mc_rate_control_params.c for units/derivation.
+			if (_param_mc_cgff_k.get() > FLT_EPSILON && _vehicle_attitude_sub.updated()) {
+				vehicle_attitude_s v_att;
+
+				if (_vehicle_attitude_sub.copy(&v_att)) {
+					const Eulerf euler(Quatf(v_att.q));
+					torque_setpoint(0) -= _param_mc_cgff_k.get() * sinf(euler.phi());
+					torque_setpoint(1) -= _param_mc_cgff_k.get() * sinf(euler.theta());
+				}
+			}
+
 			// apply low-pass filtering on yaw axis to reduce high frequency torque caused by rotor acceleration
 			torque_setpoint(2) = _output_lpf_yaw.update(torque_setpoint(2), dt);
 

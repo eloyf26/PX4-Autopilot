@@ -305,3 +305,25 @@ PARAM_DEFINE_INT32(MC_BAT_SCALE_EN, 0);
  * @group Multicopter Rate Control
  */
 PARAM_DEFINE_FLOAT(MC_YAW_TQ_CUTOFF, 2.f);
+
+/**
+ * CG-offset (top-heavy airframe) torque feedforward gain
+ *
+ * Adds a feedforward term -MC_CGFF_K * sin(roll) to the roll torque setpoint and
+ * -MC_CGFF_K * sin(pitch) to the pitch torque setpoint, to cancel the destabilizing
+ * gravity torque m*g*h*sin(angle) of an airframe whose CG sits a height h above the
+ * rotor plane (an inverted-pendulum-like plant). Units are normalized torque-setpoint
+ * per radian (same [-1,1] convention as vehicle_torque_setpoint), not physical N*m --
+ * the control allocator's normalization is geometry/CT-parameter dependent and not
+ * necessarily calibrated to the true thrust curve, so this must be tuned empirically;
+ * a reasonable starting point is (m*g*h) / (estimated max differential roll/pitch
+ * torque in N*m). 0 (default) fully disables the term for airframes with a nominal
+ * (near rotor-plane) CG.
+ *
+ * @min 0.0
+ * @max 2.0
+ * @decimal 3
+ * @increment 0.01
+ * @group Multicopter Rate Control
+ */
+PARAM_DEFINE_FLOAT(MC_CGFF_K, 0.0f);

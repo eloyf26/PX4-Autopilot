@@ -54,6 +54,7 @@
 #include <uORB/topics/parameter_update.h>
 #include <uORB/topics/rate_ctrl_status.h>
 #include <uORB/topics/vehicle_angular_velocity.h>
+#include <uORB/topics/vehicle_attitude.h>
 #include <uORB/topics/vehicle_control_mode.h>
 #include <uORB/topics/vehicle_land_detected.h>
 #include <uORB/topics/vehicle_rates_setpoint.h>
@@ -99,6 +100,7 @@ private:
 	uORB::Subscription _vehicle_land_detected_sub{ORB_ID(vehicle_land_detected)};
 	uORB::Subscription _vehicle_rates_setpoint_sub{ORB_ID(vehicle_rates_setpoint)};
 	uORB::Subscription _vehicle_status_sub{ORB_ID(vehicle_status)};
+	uORB::Subscription _vehicle_attitude_sub{ORB_ID(vehicle_attitude)};	/**< for CG-offset torque feedforward (MC_CGFF_K) */
 
 	uORB::SubscriptionInterval _parameter_update_sub{ORB_ID(parameter_update), 1_s};
 
@@ -163,6 +165,21 @@ private:
 		(ParamFloat<px4::params::MC_ACRO_SUPEXPO>) _param_mc_acro_supexpo,		/**< superexpo stick curve shape (roll & pitch) */
 		(ParamFloat<px4::params::MC_ACRO_SUPEXPOY>) _param_mc_acro_supexpoy,		/**< superexpo stick curve shape (yaw) */
 
-		(ParamBool<px4::params::MC_BAT_SCALE_EN>) _param_mc_bat_scale_en
+		(ParamBool<px4::params::MC_BAT_SCALE_EN>) _param_mc_bat_scale_en,
+
+		// STING top-heavy CG (+85mm above rotor plane) feedforward: the airframe is an
+		// inverted-pendulum-like plant with destabilizing gravity torque m*g*h*sin(angle)
+		// that grows with tilt and, combined with actuator saturation at high roll/pitch,
+		// causes an exponential divergence the reactive rate/attitude PID loop alone cannot
+		// out-run (see benchmarking/envelope diagnosis: measured closed-loop growth 27 rad/s,
+		// faster than the open-loop pendulum rate of 8.7 rad/s -- an actuator-saturation
+		// problem, not a gain problem). MC_CGFF_K is in normalized-torque-setpoint units per
+		// radian of tilt (same [-1,1] units as vehicle_torque_setpoint), NOT raw N*m -- the
+		// control allocator's torque normalization depends on CA_ROTOR*_CT/geometry, which
+		// isn't calibrated to the vehicle's true physical thrust curve here, so an exact N*m
+		// conversion isn't meaningful; MC_CGFF_K must be tuned empirically starting from the
+		// physically-derived estimate k_phys/max_torque_est (see mc_rate_control_params.c).
+		// Default 0.0 -- fully inert/no-op for every other airframe.
+		(ParamFloat<px4::params::MC_CGFF_K>) _param_mc_cgff_k
 	)
 };

@@ -111,6 +111,10 @@ private:
 	hrt_abstime _telemetry_update_last{0};
 	static constexpr int num_data_types{5}; ///< number of different telemetry data types
 	int _next_type{0};
+	// Telemetry send-schedule cursor. The rotation (kTelemetrySchedule in CrsfRc.cpp) biases
+	// the aimbot HUD frame to every other slot (~5 Hz) instead of a flat 1/num_data_types
+	// share, so the HUD survives a stingy ELRS telemetry ratio.
+	uint8_t _schedule_index{0};
 	uORB::Subscription _battery_status_sub{ORB_ID(battery_status)};
 	uORB::Subscription _vehicle_attitude_sub{ORB_ID(vehicle_attitude)};
 	uORB::Subscription _vehicle_gps_position_sub{ORB_ID(vehicle_gps_position)};

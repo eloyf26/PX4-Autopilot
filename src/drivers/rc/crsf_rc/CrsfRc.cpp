@@ -46,6 +46,16 @@ using namespace time_literals;
 
 #define CRSF_BAUDRATE 420000
 
+namespace
+{
+// Telemetry send schedule: values index the switch in CrsfRc::Run(), consumed round-robin.
+// The aimbot HUD frame (case 4) is the priority payload on this link, so it takes every
+// other slot — ~5 Hz at the 100 ms telemetry cadence — while the stock frames
+// (battery/GPS/attitude/flight-mode) share the gaps at ~1.25 Hz each. Bias further toward
+// the HUD by adding more 4s (e.g. {4,4,0,4,4,1,...}); the ELRS link must then carry it.
+constexpr uint8_t kTelemetrySchedule[]{4, 0, 4, 1, 4, 2, 4, 3};
+}
+
 CrsfRc::CrsfRc(const char *device) :
 	ModuleParams(nullptr),
 	ScheduledWorkItem(MODULE_NAME, px4::serial_port_to_wq(device))
@@ -357,7 +367,10 @@ void CrsfRc::Run()
 			}
 
 			_telemetry_update_last = _input_rc.timestamp;
-			_next_type = (_next_type + 1) % num_data_types;
+			// Weighted rotation (kTelemetrySchedule) instead of a flat round-robin, so the
+			// aimbot HUD frame gets ~half the telemetry slots (~5 Hz) rather than 1/5 (~2 Hz).
+			_next_type = kTelemetrySchedule[_schedule_index];
+			_schedule_index = (_schedule_index + 1) % sizeof(kTelemetrySchedule);
 		}
 	}
 

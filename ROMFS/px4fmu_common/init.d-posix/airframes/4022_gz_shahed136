@@ -1,0 +1,132 @@
+#!/bin/sh
+#
+# @name Shahed-136 Target (delta pusher) SITL
+#
+# Fixed-wing TARGET model for the STING interception sim. Delta BWB planform with
+# a rear PUSHER prop, 2 elevons (roll+pitch mix) + 2 winglet rudders (yaw).
+# Model: Tools/simulation/gz/models/shahed136/model.sdf (200 kg, cruise ~50 m/s).
+#
+# CONTROL ALLOCATION recipe (verified against ActuatorEffectivenessControlSurfaces.hpp
+# enum: LeftElevon=5, RightElevon=6, Rudder=4):
+#   - CA_AIRFRAME 1        (fixed-wing)
+#   - CA_ROTOR_COUNT 1     (the rear pusher ESC)
+#   - CA_SV_CS_COUNT 4     (2 elevons + 2 rudders)
+#   - Elevons: LeftElevon(5)/RightElevon(6), EACH with TRQ_R (roll) AND TRQ_P
+#     (pitch) non-null. The allocator inverts the effectiveness matrix so that a
+#     SYMMETRIC deflection = pitch and an ANTISYMMETRIC deflection = roll. No
+#     manual mixer. Signs chosen so +roll cmd -> right wing down, +pitch cmd ->
+#     nose up (iterated & ulog-verified, see shahed_cruise_test.py).
+#   - Rudders: Rudder(4) with TRQ_Y (yaw).
+#
+# Output-function -> gz-topic chain (verified in GZMixingInterfaceServo.cpp):
+#   SIM_GZ_SV_FUNCk = 201+n (Servo(n+1)) maps CA control-surface index n to gz
+#   topic /model/shahed136/servo_(k-1). CA_SV_CS0..3 == Servo1..4 == servo_0..3:
+#     servo_0 = LEFT elevon, servo_1 = RIGHT elevon,
+#     servo_2 = LEFT rudder, servo_3 = RIGHT rudder  (matches model.sdf joints).
+#
+
+. ${R}etc/init.d/rc.fw_defaults
+
+PX4_SIMULATOR=${PX4_SIMULATOR:=gz}
+PX4_GZ_WORLD=${PX4_GZ_WORLD:=default}
+PX4_SIM_MODEL=${PX4_SIM_MODEL:=shahed136}
+
+param set-default SIM_GZ_EN 1
+
+# Simulated airspeed sensor -- REQUIRED by TECS in fixed-wing SITL.
+param set-default SENS_EN_ARSPDSIM 1
+
+# ---------------- Attitude / rate loop (advanced_plane base) ----------------
+param set-default FW_PR_FF 0.08
+param set-default FW_PR_I 0.3
+param set-default FW_PR_P 0.08
+
+param set-default FW_RR_FF 0.05
+param set-default FW_RR_I 0.2
+param set-default FW_RR_P 0.03
+
+param set-default FW_YR_FF 0.3
+param set-default FW_YR_I 0.4
+param set-default FW_YR_P 0.2
+
+# Pitch limits: a fast delta target needs a slightly wider band than a trainer.
+param set-default FW_P_LIM_MAX 30
+param set-default FW_P_LIM_MIN -20
+param set-default FW_PSP_OFF 2
+
+# ---------------- Airspeed envelope: cruise 50 m/s ----------------
+param set-default FW_AIRSPD_TRIM 50
+param set-default FW_AIRSPD_MIN 38
+param set-default FW_AIRSPD_MAX 68
+param set-default FW_AIRSPD_STALL 32
+
+# ---------------- Throttle (heavy 200 kg airframe, big pusher) ----------------
+param set-default FW_THR_MIN 0.05
+param set-default FW_THR_TRIM 0.55
+param set-default FW_THR_MAX 1.0
+
+# ---------------- TECS (energy) ----------------
+param set-default FW_T_CLMB_MAX 6
+param set-default FW_T_SINK_MAX 4.0
+param set-default FW_T_SINK_MIN 2.5
+param set-default FW_T_CLMB_R_SP 5
+
+param set-default FW_LND_ANG 8
+param set-default FW_W_EN 1
+
+param set-default NAV_DLL_ACT 0
+param set-default RWTO_TKOFF 1
+
+# ================= CONTROL ALLOCATION =================
+param set-default CA_AIRFRAME 1
+
+# Rear pusher rotor (thrust only, no torque axes -- pure forward thrust).
+param set-default CA_ROTOR_COUNT 1
+param set-default CA_ROTOR0_PX -1.7
+param set-default CA_ROTOR0_PY 0.0
+param set-default CA_ROTOR0_PZ 0.0
+
+# 4 control surfaces: idx0/1 elevons, idx2/3 rudders.
+param set-default CA_SV_CS_COUNT 4
+
+# --- idx0: LEFT elevon (LeftElevon=5). +roll and +pitch effectiveness. ---
+param set-default CA_SV_CS0_TYPE 5
+param set-default CA_SV_CS0_TRQ_R -0.5
+param set-default CA_SV_CS0_TRQ_P 1.0
+
+# --- idx1: RIGHT elevon (RightElevon=6). Mirror roll, same-sign pitch. ---
+param set-default CA_SV_CS1_TYPE 6
+param set-default CA_SV_CS1_TRQ_R 0.5
+param set-default CA_SV_CS1_TRQ_P 1.0
+
+# --- idx2: LEFT rudder (Rudder=4). Yaw. ---
+param set-default CA_SV_CS2_TYPE 4
+param set-default CA_SV_CS2_TRQ_Y 0.5
+
+# --- idx3: RIGHT rudder (Rudder=4). Yaw (same sign -> both rudders add). ---
+param set-default CA_SV_CS3_TYPE 4
+param set-default CA_SV_CS3_TRQ_Y 0.5
+
+# ================= SIM <-> gz mapping =================
+# Pusher ESC: output function 101 (Motor1) -> gz motor_speed. min/max rad/s must
+# bracket the SDF motor model (maxRotVelocity=3500).
+param set-default SIM_GZ_EC_FUNC1 101
+param set-default SIM_GZ_EC_MIN1 50
+param set-default SIM_GZ_EC_MAX1 3500
+
+# Servos: FUNC k -> Servo(201+n) -> gz servo_(k-1). See header for the chain.
+param set-default SIM_GZ_SV_FUNC1 201
+param set-default SIM_GZ_SV_FUNC2 202
+param set-default SIM_GZ_SV_FUNC3 203
+param set-default SIM_GZ_SV_FUNC4 204
+
+# Servo travel: SDF joint limits are +-0.52 rad (+-30 deg); match the gz angle map
+# so a normalized +-1 output hits the mechanical stop, not beyond it.
+param set-default SIM_GZ_SV_MAXA1 30
+param set-default SIM_GZ_SV_MINA1 -30
+param set-default SIM_GZ_SV_MAXA2 30
+param set-default SIM_GZ_SV_MINA2 -30
+param set-default SIM_GZ_SV_MAXA3 30
+param set-default SIM_GZ_SV_MINA3 -30
+param set-default SIM_GZ_SV_MAXA4 30
+param set-default SIM_GZ_SV_MINA4 -30

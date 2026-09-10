@@ -37,6 +37,7 @@
 
 #include <lib/atmosphere/atmosphere.h>
 #include <lib/mathlib/mathlib.h>
+#include <lib/world_magnetic_model/geo_mag_declination.h>
 
 #include <px4_platform_common/getopt.h>
 
@@ -396,12 +397,56 @@ void GZBridge::magnetometerCallback(const gz::msgs::Magnetometer &msg)
 	report.device_id = id.devid;
 	report.temperature = this->_temperature;
 
-	// FIMEX: once we're on jetty or later
-	// The magnetometer plugin publishes in units of gauss and in a weird left handed coordinate system
-	// https://github.com/gazebosim/gz-sim/pull/2460
-	report.x = -msg.field_tesla().y();
-	report.y = -msg.field_tesla().x();
-	report.z = msg.field_tesla().z();
+	// Gazebo's reading is unusable, so we build the field ourselves and keep
+	// this callback only as the sampling clock.
+	//
+	// It used to be converted with (-y, -x, z), a determinant -1 reflection
+	// left over from the left-handed frame that gazebosim/gz-sim#2460 fixed.
+	// On gz-sensors 8.2.2 the result is not a rigid measurement of any field:
+	// rotated to world with the true attitude it wanders 15 deg (median).
+	// Underneath that, gz-sim writes the field's NED components into ENU axes
+	// -- where the WMM wants N=+0.225 E=+0.053 D=+0.425 G it gives N=+0.054
+	// E=+0.224 D=-0.427 -- which is a world-frame error no convention here can
+	// undo, and which stops the vehicle arming once the reading is rigid
+	// enough for EKF2 to trust it.
+	//
+	// Things that look like fixes and are not: the world's <magnetic_field> is
+	// ignored whenever <spherical_coordinates> is present, which is every PX4
+	// world; EKF2_MAG_DECL only corrects declination, not the inverted
+	// inclination; EKF2_MAG_TYPE 5 stops cs_yaw_align ever latching so arming
+	// fails on local_position_invalid; SENS_EN_MAGSIM rotates by the estimated
+	// attitude, so it is circular and carries no heading information.
+	matrix::Vector3f field_body;
+
+	if (_mag_ground_truth_valid && _pos_ref.isInitialized()) {
+		// Reference rather than current position: the WMM varies over degrees of
+		// latitude, so a flight's worth of travel does not move it measurably.
+		const float lat = (float)_pos_ref.getProjectionReferenceLat();
+		const float lon = (float)_pos_ref.getProjectionReferenceLon();
+
+		const matrix::Vector3f field_ned = matrix::Dcmf(matrix::Eulerf(
+				0.f,
+				-math::radians(get_mag_inclination_degrees(lat, lon)),
+				math::radians(get_mag_declination_degrees(lat, lon))))
+						   * matrix::Vector3f(get_mag_strength_gauss(lat, lon), 0.f, 0.f);
+
+		field_body = matrix::Dcmf(_q_ground_truth).transpose() * field_ned;
+
+		// 3 mgauss RMS, the noise the x500 model claims for its IIS2MDC.
+		field_body += matrix::Vector3f(generate_wgn() * 0.003f,
+					       generate_wgn() * 0.003f,
+					       generate_wgn() * 0.003f);
+
+	} else {
+		// Before the first pose or GPS sample: FLU -> FRD on what gz gave us.
+		field_body = matrix::Vector3f(msg.field_tesla().x(),
+					      -msg.field_tesla().y(),
+					      -msg.field_tesla().z());
+	}
+
+	report.x = field_body(0);
+	report.y = field_body(1);
+	report.z = field_body(2);
 
 	_sensor_mag_pub.publish(report);
 }
@@ -528,6 +573,11 @@ void GZBridge::poseInfoCallback(const gz::msgs::Pose_V &msg)
 			vehicle_attitude_groundtruth.q[3] = q_nb.Z();
 			vehicle_attitude_groundtruth.timestamp = timestamp;
 			_attitude_ground_truth_pub.publish(vehicle_attitude_groundtruth);
+
+			// Cached for the synthetic magnetometer, which needs the true
+			// attitude rather than the estimate.
+			_q_ground_truth = matrix::Quatf(vehicle_attitude_groundtruth.q);
+			_mag_ground_truth_valid = true;
 
 			// publish angular velocity groundtruth
 			const matrix::Eulerf euler{matrix::Quatf(vehicle_attitude_groundtruth.q)};

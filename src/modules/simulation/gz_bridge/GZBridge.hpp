@@ -171,6 +171,11 @@ private:
 	matrix::Vector3f _euler_prev{};
 	hrt_abstime _timestamp_prev{};
 
+	// True attitude, cached from poseInfoCallback for the synthetic
+	// magnetometer built in magnetometerCallback.
+	matrix::Quatf _q_ground_truth{};
+	bool _mag_ground_truth_valid{false};
+
 	const std::string _world_name;
 	const std::string _model_name;
 

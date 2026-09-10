@@ -65,6 +65,7 @@ if (gz-transport_FOUND)
 		DEPENDS
 			mixer_module
 			px4_work_queue
+			world_magnetic_model
 			${GZ_TRANSPORT_TARGET}
 		MODULE_CONFIG
 			module.yaml

@@ -8,11 +8,15 @@ replica.
 | File | What it is |
 | --- | --- |
 | `README.md` | this document |
-| `kicad/cuav_v6x_fmum.kicad_pro` | **KiCad 8 project** — open this; five hierarchical sheets, nets carried by global labels |
+| `kicad/fmum/cuav_v6x_fmum.kicad_pro` | **KiCad 8 project of the FMU module**: 4 schematic sheets + `cuav_v6x_fmum.kicad_pcb` (36 × 31.4 mm, 6 layers, placed, net-assigned, unrouted) |
+| `kicad/imu/cuav_v6x_imu.kicad_pro` | **KiCad 8 project of the IMU board**: schematic + `cuav_v6x_imu.kicad_pcb` (~25 × 18 mm octagon, 4 layers, placed, unrouted) |
+| `kicad/lib/` | the official KiCad 8 footprints used (fetched from the 8.0.8 library tag) and ST's pin-data XML for the STM32H743IIKx ball map |
+| `parts.py` | the parts database: every component, its real package pin numbers and nets, board side and position |
+| `gen_kicad.py`, `gen_pcb.py` | generators for the schematics and the two PCBs (run in this order) |
 | `schematic/01…07_*.svg` | seven schematic sheets (MCU, core peripherals, power + sensors, X1, X2, IMU flex, IMU board) |
 | `netlist.csv` | every MCU pin / connector pin / IMU-board pin → net → destination, machine readable |
-| `gen_schematic.py` | the single data table the sheets, netlist and KiCad project are generated from |
-| `gen_kicad.py`, `build_html.py` | generators for the KiCad project and the HTML report |
+| `gen_schematic.py` | the pin / connector tables the SVG sheets, netlist and `parts.py` are built from |
+| `build_html.py` | generator for the HTML report |
 | `cuav_v6x_fmum_schematic.html` | self-contained report (same content as the published artifact) |
 | `photos/` | the four source photos (FMU module and IMU board), downscaled |
 
@@ -177,25 +181,48 @@ Key ideas worth understanding before you copy it:
 
 ## 3. Schematic sheets
 
-### KiCad
+### KiCad — two projects, two PCBs
 
-Open `kicad/cuav_v6x_fmum.kicad_pro` in KiCad 8 (7 also reads it). The root sheet holds
-five hierarchical sheets: MCU, bus connectors, power and sensors, core peripherals,
-IMU board. Every connection is a **global label**, so the netlist, highlighting
-(click a label, press backtick) and ERC work immediately; there are no drawn wires,
-which is the fastest way to *read* a dense design and the normal way FMU-class
-schematics are drawn anyway. Symbols are embedded in each sheet (no external library
-needed). Notes for working with it:
+```
+kicad/fmum/cuav_v6x_fmum.kicad_pro     FMU module   (schematic, 4 sheets + PCB)
+kicad/imu/cuav_v6x_imu.kicad_pro       IMU board    (schematic + PCB)
+```
 
-* U1's pin numbers are the port names (`PA0`…) because the ball map is not included.
-  When you go to layout, use *Change Symbol* to the library part
-  `MCU_ST_STM32H7:STM32H743IIKx`, which has identical pin names and the real ball numbers.
-* Footprints are pre-filled where a standard KiCad footprint exists (DF40, SOIC-8, QFN,
-  SOT-23-5, microSD, UFBGA-176). Substitute parts (regulators, LDOs, load switch) have
-  none until you pick a part.
-* ERC will report the intentionally open pins (X2 spares, ICM-20649 FSYNC, BMI088 unused
-  INT pins) and a few "power pin not driven" notes on rails that come from the base board.
-* Regenerate after editing the tables: `python3 gen_kicad.py`.
+Open either `.kicad_pro` in KiCad 8 or newer. Everything is self-contained: symbols are
+embedded in the sheets and footprints in the boards, so no library setup is needed.
+
+**What the PCBs contain, and how much to trust each part**
+
+| Item | Status |
+| --- | --- |
+| FMUM outline 36.0 × 31.4 mm, R2.3 corners, four ∅2.0 grounded holes at 2.3 mm from the edges | from the Pixhawk DS-010 drawing — exact |
+| X1 / X2 positions (4.1 and 33.0 mm from the left edge in the base-side view, centred 14.5 mm from the bottom edge), pin 1 at the bottom, odd pins on the left in that view | from DS-010 — exact position; pin-1 corner follows the drawing |
+| LED positions (blue 6.70, green 8.30, red 9.85 mm from the left, 2.3 mm from the bottom) | from DS-010 — exact |
+| Baro stress-relief slot, IMU flex connector, microSD, FRAM, crystals, RTC cell, regulators, passives | positions read off the photos, about ±0.5 mm |
+| Every pad's net (670 pads on the FMUM, 171 on the IMU board) | from the firmware pin map and the datasheets — reliable |
+| STM32H743IIK6 footprint: 201 balls on a 0.65 mm grid, ball names from ST's own pin data, 0.30 mm pads | exact |
+| Footprints for SOIC-8, QFN-20/24, LGA-14, SOT-23/-223, 0402/0603/0805, crystals, LEDs, microSD | official KiCad 8 library files (`kicad/lib/`) |
+| Generated footprints: DF40 100/50-pin, BM20 34-pin, BMI088 LGA-16, ICP-20100 LGA-10, MagI2C MLF-28, PNI coils, RTC cell, test/trace pads | pin order from the datasheets; pad **geometry approximated** — compare with the Hirose / PNI / Bosch / TDK drawings before ordering boards |
+| IMU board outline (25 × 18 mm octagon, 4.8 / 4.0 mm chamfers, ∅3 mm notches, ∅2.2 holes) | estimated from the photos using the coils and connector as scale |
+| Copper routing, inner-layer planes, vias | **not included** — a 6-layer BGA design cannot be recovered from photographs. The ratsnest is complete; route it yourself |
+
+Substitute parts (the replica choice, not the original): U2 3.3 V regulator (an LDO in SOT-223
+stands in for CUAV's switching regulator), U3–U6 sensor LDOs (TLV75533 pinout: IN, GND, EN, NC, OUT),
+U7 microSD load switch (check the pinout of the part you buy), BT1 (Seiko MS621FE footprint).
+U11 (SE050 secure element) is placed with its pads deliberately **unassigned** because its pinout
+could not be verified; PX4 runs without it.
+
+**Working with it**
+
+* Pin numbers in the schematic symbols are the real package pins, so *Update PCB from Schematic*
+  round-trips cleanly. Click a global label and press ` to highlight a net across sheets.
+* Front side of the FMUM PCB = SD-card side; the MCU, bus connectors, IMU 3 and barometer sit on the
+  back (B.Cu), which is what plugs toward the base board.
+* Set the FMUM stackup to 6 layers (F.Cu, In1–In4, B.Cu are defined); use In1/In4 as ground and
+  power planes next to the outer layers, 0.1 mm/0.1 mm rules and 0.2 mm vias for the BGA escape.
+* ERC/DRC will flag the intentionally open pins (X2 spares, SE050, unused INT pins) and the
+  unrouted nets.
+* Regenerate after editing `parts.py`: `python3 gen_kicad.py && python3 gen_pcb.py`.
 
 ### SVG sheets
 

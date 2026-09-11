@@ -1,0 +1,11 @@
+(kicad_sch (version 20231120) (generator "gen_kicad") (generator_version "8.0")
+(uuid "c31c453f-b1f5-56f1-86c6-499f258a3708")
+(paper "A4")
+(lib_symbols
+)
+(text "cuav_v6x_imu: reverse-engineered CUAV V6X hardware (Pixhawk FMUv6X). Not vendor data." (exclude_from_sim no) (at 110 40 0) (effects (font (size 2.0 2.0)) (justify left bottom)) (uuid "a743c7ff-8391-5cb1-b2ef-e6493bbce502"))
+(text "Connectivity by global labels; pin numbers are the real package pins (U1: BGA balls)." (exclude_from_sim no) (at 110 46 0) (effects (font (size 1.5 1.5)) (justify left bottom)) (uuid "2709e125-22b5-5456-bb89-eab128578b14"))
+(text "Sources: PX4 boards/px4/fmu-v6x, Pixhawk DS-010/DS-012, manufacturer datasheets." (exclude_from_sim no) (at 110 52 0) (effects (font (size 1.5 1.5)) (justify left bottom)) (uuid "d5c1edf6-a447-5b43-9779-55f3ef56a838"))
+(sheet (at 25.4 30) (size 70 25) (fields_autoplaced yes) (stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0.0)) (uuid "5e4d2a33-6713-5ea1-9719-7c680bea8dfa") (property "Sheetname" "IMU board" (at 25.4 29.2 0) (effects (font (size 1.27 1.27)) (justify left bottom))) (property "Sheetfile" "01_imu.kicad_sch" (at 25.4 55.6 0) (effects (font (size 1.27 1.27)) (justify left top))) (instances (project "cuav_v6x_imu" (path "/c31c453f-b1f5-56f1-86c6-499f258a3708" (page "2")))))
+(sheet_instances (path "/" (page "1")))
+)

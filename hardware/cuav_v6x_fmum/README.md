@@ -8,10 +8,19 @@ replica.
 | File | What it is |
 | --- | --- |
 | `README.md` | this document |
-| `schematic/01…06_*.svg` | six schematic sheets (MCU, core peripherals, power + sensors, X1, X2, IMU flex) |
-| `netlist.csv` | every MCU pin / connector pin → net → destination, machine readable |
-| `gen_schematic.py` | the single data table the sheets and netlist are generated from |
-| `photos/` | the two source photos, downscaled |
+| `kicad/cuav_v6x_fmum.kicad_pro` | **KiCad 8 project** — open this; five hierarchical sheets, nets carried by global labels |
+| `schematic/01…07_*.svg` | seven schematic sheets (MCU, core peripherals, power + sensors, X1, X2, IMU flex, IMU board) |
+| `netlist.csv` | every MCU pin / connector pin / IMU-board pin → net → destination, machine readable |
+| `gen_schematic.py` | the single data table the sheets, netlist and KiCad project are generated from |
+| `gen_kicad.py`, `build_html.py` | generators for the KiCad project and the HTML report |
+| `cuav_v6x_fmum_schematic.html` | self-contained report (same content as the published artifact) |
+| `photos/` | the four source photos (FMU module and IMU board), downscaled |
+
+> **Are these the official schematics? No.** CUAV does not publish the schematic of
+> the V6X modules, and the full Pixhawk FMUv6X reference schematics are available only
+> to Dronecode Foundation members. Everything here is an independent reconstruction.
+> Connectivity is derived from the firmware that runs on this exact hardware, so it is
+> reliable; part choices for regulators and passives are engineering substitutes.
 
 > **Provenance / confidence.** No vendor schematic of this module is public. The
 > schematic below was rebuilt from three sources that describe this exact hardware:
@@ -94,6 +103,34 @@ LED/SD/battery placement. CUAV re-laid the board but kept the reference architec
 | Parameters | **FM25V02A** FRAM | SPI5 | PG7 | — | `FMU_VDD_3V3` | **this module** |
 | Secure element | NXP **SE050** | I2C4 | 0x48 | — | `FMU_VDD_3V3` | **this module** (likely) |
 
+### The second board: `V6X IMU RC10` (2022-09-20)
+
+The octagonal board on the other end of the FLEX cable is CUAV's **IMU board**. It sits
+in an elastomer isolation mount (the two half-round notches and the four M1-M4 ground
+pads are the mount interface), which is why it is a separate PCB at all: the inertial
+sensors ride on a damped mass, while the processor board is bolted rigidly to the base.
+It contains no regulators; all its power arrives over the flex.
+
+| What you see | What it is | Confidence |
+| --- | --- | --- |
+| rectangular LGA, top left, sensor side | **Bosch BMI088** accel + gyro (IMU 1, SPI3) | high (package 3 × 4.5 mm, firmware) |
+| small 3-row-marked LGA below it | **TDK ICM-42688-P** (IMU 2, SPI2) | high |
+| 4 × 4 mm QFN, centre right | **PNI MagI2C**, the RM3100 compass controller (I2C4, 0x20) | high |
+| two flat black bars marked `PNI`, one horizontal one vertical | **PNI Sen-XY-f** sense coils for the X and Y magnetic axes (mounted at 90°) | high |
+| black cube below the QFN | **PNI Sen-Z-f** coil, Z axis | high |
+| metal lid with port hole, bottom left | **TDK ICP-20100** barometer #1 (I2C4, 0x64) | high |
+| white arrow | flight-direction reference for the IMU axes | high |
+| flex side: 34-pin 0.4 mm connector `FLEX` | mating half of the FMUM's J3 (BM20 series); an FPC jumper links the two | high |
+| flex side: SOIC-8 | **24LC64** calibration EEPROM (I2C4, 0x50; PX4 `imu_eeprom`: cal data, MFT revision, ID) | high |
+| flex side: four large resistors marked `4700` | **470 Ω heater resistors**, paralleled (117 Ω across 5 V ≈ 0.21 W) | high |
+| flex side: SOT-23 marked `3400` next to a resistor silkscreen symbol | **N-MOSFET (AO3400 class)**, low-side switch for the heater, gate on the `HEATER` line | high |
+| remaining 0402/0603 parts | decoupling, gate pull-down | — |
+
+Sheet `07_imu_board.svg` (and KiCad sheet 5) draws it. Because the flex pinout is fixed by
+the standard, the IMU board and the FMU module are individually replaceable; the
+sensor rotations PX4 applies (`-R 4` BMI088, `-R 6` ICM-42688-P, `-R 14` ICM-20649) encode how
+each chip is oriented relative to the arrow.
+
 ---
 
 ## 2. How the module works (architecture)
@@ -140,7 +177,29 @@ Key ideas worth understanding before you copy it:
 
 ## 3. Schematic sheets
 
-Open the SVGs in `schematic/` (any browser or Inkscape/KiCad-image import). Net labels
+### KiCad
+
+Open `kicad/cuav_v6x_fmum.kicad_pro` in KiCad 8 (7 also reads it). The root sheet holds
+five hierarchical sheets: MCU, bus connectors, power and sensors, core peripherals,
+IMU board. Every connection is a **global label**, so the netlist, highlighting
+(click a label, press backtick) and ERC work immediately; there are no drawn wires,
+which is the fastest way to *read* a dense design and the normal way FMU-class
+schematics are drawn anyway. Symbols are embedded in each sheet (no external library
+needed). Notes for working with it:
+
+* U1's pin numbers are the port names (`PA0`…) because the ball map is not included.
+  When you go to layout, use *Change Symbol* to the library part
+  `MCU_ST_STM32H7:STM32H743IIKx`, which has identical pin names and the real ball numbers.
+* Footprints are pre-filled where a standard KiCad footprint exists (DF40, SOIC-8, QFN,
+  SOT-23-5, microSD, UFBGA-176). Substitute parts (regulators, LDOs, load switch) have
+  none until you pick a part.
+* ERC will report the intentionally open pins (X2 spares, ICM-20649 FSYNC, BMI088 unused
+  INT pins) and a few "power pin not driven" notes on rails that come from the base board.
+* Regenerate after editing the tables: `python3 gen_kicad.py`.
+
+### SVG sheets
+
+Open the SVGs in `schematic/` (any browser or Inkscape). Net labels
 follow the Pixhawk standard names so they line up with the published base-board
 examples.
 
@@ -152,6 +211,7 @@ examples.
 | `04_x1_pab_100pin.svg` | X1 pin-by-pin with the MCU pin on each signal |
 | `05_x2_pab_50pin.svg` | X2 pin-by-pin (RMII, SPI6, spares) |
 | `06_j3_imu_flex_34pin.svg` | J3 IMU flex pin-by-pin |
+| `07_imu_board.svg` | the IMU board: BMI088, ICM-42688-P, RM3100 (MagI2C + 3 coils), ICP-20100 #1, 24LC64, heater |
 
 ### Full MCU pin map (as used by PX4 on this module)
 

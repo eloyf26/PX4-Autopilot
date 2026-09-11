@@ -1,0 +1,450 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 1180" width="1720" height="1180" font-family="'IBM Plex Mono', 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11">
+<rect x="0" y="0" width="1720" height="1180" fill="#fbfaf6" stroke="#2b3a4a" stroke-width="2"/>
+<rect x="986" y="1104" width="720" height="62" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.2"/>
+<text x="996" y="1126" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d232b">Sheet 7 · IMU board &#x27;V6X IMU RC10&#x27; (2022-09-20)</text>
+<text x="996" y="1144" font-size="10.5" fill="#1d232b">vibration-isolated sensor carrier on the other end of the J3 flex: BMI088, ICM-42688-P, RM3100, ICP-20100 #1, 24LC64, heater</text>
+<text x="996" y="1158" font-size="9.5" fill="#7a828c">CUAV V6X FMUM (RC11, 07-2023) · reverse-engineered from PX4 fmu-v6x board files + Pixhawk DS-010/DS-012 · not vendor data</text>
+<rect x="330" y="40" width="140" height="330.5" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="400" y="56" font-size="11" fill="#2b3a4a" text-anchor="middle" font-weight="700">J1  (IMU side of the flex)</text>
+<text x="400" y="68" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">BM20B(0.8)-34DS-0.4V(53) mating half; same pin numbers as FMUM J3</text>
+<line x1="302" y1="86.0" x2="330" y2="86.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="89.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">1</text>
+<line x1="302" y1="86.0" x2="302" y2="92.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="92.0" x2="309" y2="92.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="95.5" x2="306.5" y2="95.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="99.0" x2="304" y2="99.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="86.0" x2="498" y2="86.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="89.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">2</text>
+<text x="503" y="89.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_nCS1_BMI088_ACCEL</text>
+<line x1="302" y1="102.5" x2="330" y2="102.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="336" y="106.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">3</text>
+<text x="297" y="106.0" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI3_DRDY2_BMI088_INT3_GYRO</text>
+<line x1="470" y1="102.5" x2="498" y2="102.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="106.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">4</text>
+<text x="503" y="106.0" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_nCS2_BMI088_GYRO</text>
+<line x1="302" y1="119.0" x2="330" y2="119.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="336" y="122.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">5</text>
+<text x="297" y="122.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SDA_FMU</text>
+<line x1="470" y1="119.0" x2="498" y2="119.0" stroke="#b8442c" stroke-width="1.3"/>
+<text x="464" y="122.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">6</text>
+<text x="503" y="122.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS3</text>
+<line x1="302" y1="135.5" x2="330" y2="135.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="336" y="139.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">7</text>
+<text x="297" y="139.0" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SCL_FMU</text>
+<line x1="470" y1="135.5" x2="498" y2="135.5" stroke="#6b7280" stroke-width="1.3"/>
+<text x="464" y="139.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">8</text>
+<line x1="498" y1="135.5" x2="498" y2="141.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="491" y1="141.5" x2="505" y2="141.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="493.5" y1="145.0" x2="502.5" y2="145.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="496" y1="148.5" x2="500" y2="148.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="302" y1="152.0" x2="330" y2="152.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="155.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">9</text>
+<line x1="302" y1="152.0" x2="302" y2="158.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="158.0" x2="309" y2="158.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="161.5" x2="306.5" y2="161.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="165.0" x2="304" y2="165.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="152.0" x2="498" y2="152.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="155.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">10</text>
+<text x="503" y="155.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_SCK_SENSOR3</text>
+<line x1="302" y1="168.5" x2="330" y2="168.5" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="172.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">11</text>
+<line x1="302" y1="168.5" x2="302" y2="174.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="174.5" x2="309" y2="174.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="178.0" x2="306.5" y2="178.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="181.5" x2="304" y2="181.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="168.5" x2="498" y2="168.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="172.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">12</text>
+<text x="503" y="172.0" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_MISO_SENSOR3</text>
+<line x1="302" y1="185.0" x2="330" y2="185.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="188.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">13</text>
+<line x1="302" y1="185.0" x2="302" y2="191.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="191.0" x2="309" y2="191.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="194.5" x2="306.5" y2="194.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="198.0" x2="304" y2="198.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="185.0" x2="498" y2="185.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="188.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">14</text>
+<text x="503" y="188.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_MOSI_SENSOR3</text>
+<line x1="302" y1="201.5" x2="330" y2="201.5" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="205.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">15</text>
+<line x1="302" y1="201.5" x2="302" y2="207.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="207.5" x2="309" y2="207.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="211.0" x2="306.5" y2="211.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="214.5" x2="304" y2="214.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="201.5" x2="498" y2="201.5" stroke="#b8442c" stroke-width="1.3"/>
+<text x="464" y="205.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">16</text>
+<text x="503" y="205.0" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS4</text>
+<line x1="302" y1="218.0" x2="330" y2="218.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="221.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">17</text>
+<line x1="302" y1="218.0" x2="302" y2="224.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="224.0" x2="309" y2="224.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="227.5" x2="306.5" y2="227.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="231.0" x2="304" y2="231.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="218.0" x2="498" y2="218.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="464" y="221.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">18</text>
+<line x1="498" y1="218.0" x2="498" y2="224.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="491" y1="224.0" x2="505" y2="224.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="493.5" y1="227.5" x2="502.5" y2="227.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="496" y1="231.0" x2="500" y2="231.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="302" y1="234.5" x2="330" y2="234.5" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="238.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">19</text>
+<line x1="302" y1="234.5" x2="302" y2="240.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="240.5" x2="309" y2="240.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="244.0" x2="306.5" y2="244.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="247.5" x2="304" y2="247.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="234.5" x2="498" y2="234.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="238.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">20</text>
+<text x="503" y="238.0" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI2_SCK_SENSOR2</text>
+<line x1="302" y1="251.0" x2="330" y2="251.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="254.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">21</text>
+<line x1="302" y1="251.0" x2="302" y2="257.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="257.0" x2="309" y2="257.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="260.5" x2="306.5" y2="260.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="264.0" x2="304" y2="264.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="251.0" x2="498" y2="251.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="254.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">22</text>
+<text x="503" y="254.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI2_MISO_SENSOR2</text>
+<line x1="302" y1="267.5" x2="330" y2="267.5" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="271.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">23</text>
+<line x1="302" y1="267.5" x2="302" y2="273.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="273.5" x2="309" y2="273.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="277.0" x2="306.5" y2="277.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="280.5" x2="304" y2="280.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="267.5" x2="498" y2="267.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="271.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">24</text>
+<text x="503" y="271.0" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI2_MOSI_SENSOR2</text>
+<line x1="302" y1="284.0" x2="330" y2="284.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="287.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">25</text>
+<line x1="302" y1="284.0" x2="302" y2="290.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="290.0" x2="309" y2="290.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="293.5" x2="306.5" y2="293.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="297.0" x2="304" y2="297.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="284.0" x2="498" y2="284.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="464" y="287.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">26</text>
+<line x1="498" y1="284.0" x2="498" y2="290.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="491" y1="290.0" x2="505" y2="290.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="493.5" y1="293.5" x2="502.5" y2="293.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="496" y1="297.0" x2="500" y2="297.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="302" y1="300.5" x2="330" y2="300.5" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="304.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">27</text>
+<line x1="302" y1="300.5" x2="302" y2="306.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="306.5" x2="309" y2="306.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="310.0" x2="306.5" y2="310.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="313.5" x2="304" y2="313.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="300.5" x2="498" y2="300.5" stroke="#b8442c" stroke-width="1.3"/>
+<text x="464" y="304.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">28</text>
+<text x="503" y="304.0" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_5V_IN</text>
+<line x1="302" y1="317.0" x2="330" y2="317.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="336" y="320.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">29</text>
+<line x1="302" y1="317.0" x2="302" y2="323.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="295" y1="323.0" x2="309" y2="323.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="297.5" y1="326.5" x2="306.5" y2="326.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="300" y1="330.0" x2="304" y2="330.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="470" y1="317.0" x2="498" y2="317.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="464" y="320.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">30</text>
+<text x="503" y="320.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">HEATER</text>
+<line x1="302" y1="333.5" x2="330" y2="333.5" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="336" y="337.0" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">31</text>
+<text x="297" y="337.0" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI2_DRDY2_IMU2_INT2</text>
+<line x1="470" y1="333.5" x2="498" y2="333.5" stroke="#b8442c" stroke-width="1.3"/>
+<text x="464" y="337.0" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">32</text>
+<text x="503" y="337.0" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS2</text>
+<line x1="302" y1="350.0" x2="330" y2="350.0" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="336" y="353.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">33</text>
+<text x="297" y="353.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI2_nCS1_IMU2</text>
+<line x1="470" y1="350.0" x2="498" y2="350.0" stroke="#6b7280" stroke-width="1.3"/>
+<text x="464" y="353.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">34</text>
+<line x1="498" y1="350.0" x2="498" y2="356.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="491" y1="356.0" x2="505" y2="356.0" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="493.5" y1="359.5" x2="502.5" y2="359.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="496" y1="363.0" x2="500" y2="363.0" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="780" y="60" width="190" height="180" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="875.0" y="77" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U1</text>
+<text x="785" y="99.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDD</text>
+<line x1="758" y1="96" x2="780" y2="96" stroke="#b8442c" stroke-width="1.3"/>
+<text x="754" y="99.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS3</text>
+<text x="785" y="115.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDDIO</text>
+<line x1="758" y1="112" x2="780" y2="112" stroke="#b8442c" stroke-width="1.3"/>
+<text x="754" y="115.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS3</text>
+<text x="785" y="131.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="758" y1="128" x2="780" y2="128" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="758" y1="128" x2="758" y2="134" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="751" y1="134" x2="765" y2="134" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="753.5" y1="137.5" x2="762.5" y2="137.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="756" y1="141" x2="760" y2="141" stroke="#6b7280" stroke-width="1.3"/>
+<text x="785" y="147.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GNDIO</text>
+<line x1="758" y1="144" x2="780" y2="144" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="758" y1="144" x2="758" y2="150" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="751" y1="150" x2="765" y2="150" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="753.5" y1="153.5" x2="762.5" y2="153.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="756" y1="157" x2="760" y2="157" stroke="#6b7280" stroke-width="1.3"/>
+<text x="785" y="163.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">PS</text>
+<line x1="758" y1="160" x2="780" y2="160" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="758" y1="160" x2="758" y2="166" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="751" y1="166" x2="765" y2="166" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="753.5" y1="169.5" x2="762.5" y2="169.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="756" y1="173" x2="760" y2="173" stroke="#6b7280" stroke-width="1.3"/>
+<text x="785" y="179.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCK</text>
+<line x1="758" y1="176" x2="780" y2="176" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="754" y="179.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI3_SCK_SENSOR3  [PC10]</text>
+<text x="785" y="195.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDI</text>
+<line x1="758" y1="192" x2="780" y2="192" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="754" y="195.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI3_MOSI_SENSOR3  [PB2]</text>
+<text x="785" y="211.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDO1</text>
+<line x1="758" y1="208" x2="780" y2="208" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="754" y="211.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI3_MISO_SENSOR3  [PC11]</text>
+<text x="785" y="227.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDO2</text>
+<line x1="758" y1="224" x2="780" y2="224" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="754" y="227.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI3_MISO_SENSOR3  [PC11]</text>
+<text x="965" y="99.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">CSB1 (accel)</text>
+<line x1="970" y1="96" x2="992" y2="96" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="996" y="99.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_nCS1_BMI088_ACCEL</text>
+<text x="965" y="115.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">CSB2 (gyro)</text>
+<line x1="970" y1="112" x2="992" y2="112" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="996" y="115.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_nCS2_BMI088_GYRO</text>
+<text x="965" y="131.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT1</text>
+<text x="965" y="147.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT2</text>
+<text x="965" y="163.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT3 (gyro)</text>
+<line x1="970" y1="160" x2="992" y2="160" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="996" y="163.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI3_DRDY2_BMI088_INT3_GYRO</text>
+<text x="965" y="179.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT4</text>
+<text x="875.0" y="253" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">Bosch BMI088 (IMU 1)  LGA-16 3x4.5</text>
+<text x="875.0" y="266" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">IMU 1 on SPI3, domain 3; PS = GND selects SPI. Both SDO pins share MISO (tri-state when its CS is high). PX4 rotation YAW_180 (-R 4)</text>
+<rect x="880" y="400" width="190" height="148" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="975.0" y="417" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U2</text>
+<text x="885" y="439.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDD</text>
+<line x1="858" y1="436" x2="880" y2="436" stroke="#b8442c" stroke-width="1.3"/>
+<text x="854" y="439.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS2</text>
+<text x="885" y="455.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDDIO</text>
+<line x1="858" y1="452" x2="880" y2="452" stroke="#b8442c" stroke-width="1.3"/>
+<text x="854" y="455.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS2</text>
+<text x="885" y="471.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="858" y1="468" x2="880" y2="468" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="858" y1="468" x2="858" y2="474" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="851" y1="474" x2="865" y2="474" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="853.5" y1="477.5" x2="862.5" y2="477.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="856" y1="481" x2="860" y2="481" stroke="#6b7280" stroke-width="1.3"/>
+<text x="885" y="487.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCLK</text>
+<line x1="858" y1="484" x2="880" y2="484" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="854" y="487.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI2_SCK_SENSOR2  [PI1]</text>
+<text x="885" y="503.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDI</text>
+<line x1="858" y1="500" x2="880" y2="500" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="854" y="503.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI2_MOSI_SENSOR2  [PI3]</text>
+<text x="885" y="519.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDO/AD0</text>
+<line x1="858" y1="516" x2="880" y2="516" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="854" y="519.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI2_MISO_SENSOR2  [PI2]</text>
+<text x="885" y="535.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">nCS</text>
+<line x1="858" y1="532" x2="880" y2="532" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="854" y="535.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI2_nCS1_IMU2  [PH5]</text>
+<text x="1065" y="439.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT1</text>
+<line x1="1070" y1="436" x2="1092" y2="436" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1096" y="439.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI2_DRDY2_IMU2_INT2</text>
+<text x="1065" y="455.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT2/FSYNC</text>
+<text x="975.0" y="561" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">TDK ICM-42688-P (IMU 2)  LGA-14 2.5x3</text>
+<text x="975.0" y="574" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">IMU 2 on SPI2, domain 2. PX4 rotation YAW_270 (-R 6)</text>
+<rect x="1320" y="60" width="190" height="180" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1415.0" y="77" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U3</text>
+<text x="1325" y="99.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDD</text>
+<line x1="1298" y1="96" x2="1320" y2="96" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1294" y="99.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1325" y="115.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">AVDD</text>
+<line x1="1298" y1="112" x2="1320" y2="112" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1294" y="115.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1325" y="131.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="1298" y1="128" x2="1320" y2="128" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="128" x2="1298" y2="134" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="134" x2="1305" y2="134" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="137.5" x2="1302.5" y2="137.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="141" x2="1300" y2="141" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="147.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">I2C_EN</text>
+<line x1="1298" y1="144" x2="1320" y2="144" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1294" y="147.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1325" y="163.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SA0</text>
+<line x1="1298" y1="160" x2="1320" y2="160" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="160" x2="1298" y2="166" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="166" x2="1305" y2="166" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="169.5" x2="1302.5" y2="169.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="173" x2="1300" y2="173" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="179.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SA1</text>
+<line x1="1298" y1="176" x2="1320" y2="176" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="176" x2="1298" y2="182" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="182" x2="1305" y2="182" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="185.5" x2="1302.5" y2="185.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="189" x2="1300" y2="189" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="195.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCL</text>
+<line x1="1298" y1="192" x2="1320" y2="192" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1294" y="195.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SCL_FMU  [PF14]</text>
+<text x="1325" y="211.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDA</text>
+<line x1="1298" y1="208" x2="1320" y2="208" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1294" y="211.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SDA_FMU  [PF15]</text>
+<text x="1325" y="227.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">DRDY</text>
+<text x="1505" y="99.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">LX+</text>
+<line x1="1510" y1="96" x2="1532" y2="96" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="99.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LX_A</text>
+<text x="1505" y="115.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">LX-</text>
+<line x1="1510" y1="112" x2="1532" y2="112" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="115.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LX_B</text>
+<text x="1505" y="131.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">LY+</text>
+<line x1="1510" y1="128" x2="1532" y2="128" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="131.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LY_A</text>
+<text x="1505" y="147.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">LY-</text>
+<line x1="1510" y1="144" x2="1532" y2="144" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="147.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LY_B</text>
+<text x="1505" y="163.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">LZ+</text>
+<line x1="1510" y1="160" x2="1532" y2="160" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="163.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LZ_A</text>
+<text x="1505" y="179.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">LZ-</text>
+<line x1="1510" y1="176" x2="1532" y2="176" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="179.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LZ_B</text>
+<text x="1415.0" y="253" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">PNI MagI2C (RM3100 ASIC)  QFN 4x4</text>
+<text x="1415.0" y="266" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">RM3100 controller: I2C mode, SA1=SA0=0 -&gt; 0x20. Three sense coils below</text>
+<rect x="1335" y="360" width="160" height="26" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1415" y="377" font-size="9.5" fill="#1d232b" text-anchor="middle" font-weight="600">L1  PNI Sen-XY-f coil, X</text>
+<line x1="1315" y1="373" x2="1335" y2="373" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="1495" y1="373" x2="1515" y2="373" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1310" y="377" font-size="9" fill="#0b6e4f" text-anchor="end" font-weight="600">MAG_LX_A</text>
+<text x="1520" y="377" font-size="9" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LX_B</text>
+<rect x="1335" y="400" width="160" height="26" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1415" y="417" font-size="9.5" fill="#1d232b" text-anchor="middle" font-weight="600">L2  PNI Sen-XY-f coil, Y</text>
+<line x1="1315" y1="413" x2="1335" y2="413" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="1495" y1="413" x2="1515" y2="413" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1310" y="417" font-size="9" fill="#0b6e4f" text-anchor="end" font-weight="600">MAG_LY_A</text>
+<text x="1520" y="417" font-size="9" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LY_B</text>
+<rect x="1335" y="440" width="160" height="26" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1415" y="457" font-size="9.5" fill="#1d232b" text-anchor="middle" font-weight="600">L3  PNI Sen-Z-f coil, Z</text>
+<line x1="1315" y1="453" x2="1335" y2="453" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="1495" y1="453" x2="1515" y2="453" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1310" y="457" font-size="9" fill="#0b6e4f" text-anchor="end" font-weight="600">MAG_LZ_A</text>
+<text x="1520" y="457" font-size="9" fill="#0b6e4f" text-anchor="start" font-weight="600">MAG_LZ_B</text>
+<text x="1250" y="490" font-size="9" fill="#7a828c" text-anchor="start" font-weight="400">Sen-XY-f: 6.5 x 2.5 mm flat coils, X and Y at 90 deg. Sen-Z-f: 3.6 mm cube, vertical axis.</text>
+<rect x="1320" y="560" width="190" height="116" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1415.0" y="577" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U4</text>
+<text x="1325" y="599.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDD</text>
+<line x1="1298" y1="596" x2="1320" y2="596" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1294" y="599.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1325" y="615.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDDIO</text>
+<line x1="1298" y1="612" x2="1320" y2="612" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1294" y="615.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1325" y="631.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="1298" y1="628" x2="1320" y2="628" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="628" x2="1298" y2="634" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="634" x2="1305" y2="634" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="637.5" x2="1302.5" y2="637.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="641" x2="1300" y2="641" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="647.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCL</text>
+<line x1="1298" y1="644" x2="1320" y2="644" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1294" y="647.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SCL_FMU  [PF14]</text>
+<text x="1325" y="663.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDA</text>
+<line x1="1298" y1="660" x2="1320" y2="660" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1294" y="663.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SDA_FMU  [PF15]</text>
+<text x="1505" y="599.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">AD0</text>
+<line x1="1510" y1="596" x2="1532" y2="596" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1536" y="599.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1505" y="615.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">CSB</text>
+<line x1="1510" y1="612" x2="1532" y2="612" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1536" y="615.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1505" y="631.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">INT</text>
+<text x="1415.0" y="689" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">TDK ICP-20100 (baro 1)  LGA-10 2x2.5</text>
+<text x="1415.0" y="702" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">Baro 1 on I2C4, AD0 = 1 -&gt; 0x64 (baro 2 on the FMUM uses AD0 = 0 -&gt; 0x63)</text>
+<rect x="1320" y="760" width="190" height="132" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1415.0" y="777" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U5</text>
+<text x="1325" y="799.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VCC</text>
+<line x1="1298" y1="796" x2="1320" y2="796" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1294" y="799.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1325" y="815.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VSS</text>
+<line x1="1298" y1="812" x2="1320" y2="812" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="812" x2="1298" y2="818" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="818" x2="1305" y2="818" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="821.5" x2="1302.5" y2="821.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="825" x2="1300" y2="825" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="831.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">A0</text>
+<line x1="1298" y1="828" x2="1320" y2="828" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="828" x2="1298" y2="834" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="834" x2="1305" y2="834" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="837.5" x2="1302.5" y2="837.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="841" x2="1300" y2="841" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="847.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">A1</text>
+<line x1="1298" y1="844" x2="1320" y2="844" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="844" x2="1298" y2="850" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="850" x2="1305" y2="850" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="853.5" x2="1302.5" y2="853.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="857" x2="1300" y2="857" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="863.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">A2</text>
+<line x1="1298" y1="860" x2="1320" y2="860" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="860" x2="1298" y2="866" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="866" x2="1305" y2="866" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="869.5" x2="1302.5" y2="869.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="873" x2="1300" y2="873" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1325" y="879.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">WP</text>
+<line x1="1298" y1="876" x2="1320" y2="876" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1298" y1="876" x2="1298" y2="882" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1291" y1="882" x2="1305" y2="882" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1293.5" y1="885.5" x2="1302.5" y2="885.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1296" y1="889" x2="1300" y2="889" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1505" y="799.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">SCL</text>
+<line x1="1510" y1="796" x2="1532" y2="796" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="799.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">I2C4_SCL_FMU</text>
+<text x="1505" y="815.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">SDA</text>
+<line x1="1510" y1="812" x2="1532" y2="812" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1536" y="815.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">I2C4_SDA_FMU</text>
+<text x="1415.0" y="905" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">Microchip 24LC64 cal. EEPROM  SOIC-8</text>
+<text x="1415.0" y="918" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">PX4 &#x27;imu_eeprom&#x27;: calibration data, MFT revision, ID (mtd.cpp)</text>
+<text x="780" y="680" font-size="12" fill="#2b3a4a" text-anchor="start" font-weight="700" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif">IMU heater</text>
+<text x="780" y="698" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">Four 470 R (marked 4700) in parallel = 117 R across VDD_5V_IN -&gt; 0.21 W of heating right under the IMUs.</text>
+<text x="780" y="712" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">Q1 (SOT-23, marked 3400) switches the low side from the HEATER line (PB10 on the FMUM, PWM/on-off).</text>
+<line x1="820" y1="740" x2="820" y2="752" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="812" y="752" width="16" height="36" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="820" y="774" font-size="8.5" fill="#1d232b" text-anchor="middle" font-weight="400">470</text>
+<text x="820" y="802" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R1</text>
+<line x1="820" y1="788" x2="820" y2="810" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="890" y1="740" x2="890" y2="752" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="882" y="752" width="16" height="36" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="890" y="774" font-size="8.5" fill="#1d232b" text-anchor="middle" font-weight="400">470</text>
+<text x="890" y="802" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R2</text>
+<line x1="890" y1="788" x2="890" y2="810" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="960" y1="740" x2="960" y2="752" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="952" y="752" width="16" height="36" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="960" y="774" font-size="8.5" fill="#1d232b" text-anchor="middle" font-weight="400">470</text>
+<text x="960" y="802" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R3</text>
+<line x1="960" y1="788" x2="960" y2="810" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="1030" y1="740" x2="1030" y2="752" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="1022" y="752" width="16" height="36" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1030" y="774" font-size="8.5" fill="#1d232b" text-anchor="middle" font-weight="400">470</text>
+<text x="1030" y="802" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R4</text>
+<line x1="1030" y1="788" x2="1030" y2="810" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="820" y1="740" x2="1030" y2="740" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1038" y="744" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_5V_IN  (J1-28)</text>
+<line x1="820" y1="810" x2="1030" y2="810" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1038" y="814" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">HEATER_SW</text>
+<circle cx="820" cy="740" r="2.2" fill="#b8442c"/>
+<circle cx="820" cy="810" r="2.2" fill="#0b6e4f"/>
+<circle cx="890" cy="740" r="2.2" fill="#b8442c"/>
+<circle cx="890" cy="810" r="2.2" fill="#0b6e4f"/>
+<circle cx="960" cy="740" r="2.2" fill="#b8442c"/>
+<circle cx="960" cy="810" r="2.2" fill="#0b6e4f"/>
+<circle cx="1030" cy="740" r="2.2" fill="#b8442c"/>
+<circle cx="1030" cy="810" r="2.2" fill="#0b6e4f"/>
+<rect x="800" y="840" width="120" height="68" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="860.0" y="857" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">Q1</text>
+<text x="805" y="879.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">G</text>
+<line x1="778" y1="876" x2="800" y2="876" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="774" y="879.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">HEATER  [PB10]</text>
+<text x="915" y="879.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">D</text>
+<line x1="920" y1="876" x2="942" y2="876" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="946" y="879.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">HEATER_SW</text>
+<text x="915" y="895.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">S</text>
+<line x1="920" y1="892" x2="942" y2="892" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="942" y1="892" x2="942" y2="898" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="935" y1="898" x2="949" y2="898" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="937.5" y1="901.5" x2="946.5" y2="901.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="940" y1="905" x2="944" y2="905" stroke="#6b7280" stroke-width="1.3"/>
+<text x="860.0" y="921" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">N-MOSFET, marked 3400 (AO3400 class)  SOT-23</text>
+<text x="860.0" y="934" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">low-side switch; R5 100k keeps it off while the FMU boots</text>
+<rect x="60" y="430" width="430" height="110" fill="#fffbea" stroke="#a16207" stroke-width="1" rx="0"/>
+<text x="68" y="446" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">All rails come over the flex: SENSORS3 (pin 6) -&gt; BMI088,</text>
+<text x="68" y="460" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">SENSORS2 (pin 32) -&gt; ICM-42688-P, SENSORS4 (pin 16) -&gt; compass,</text>
+<text x="68" y="474" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">baro 1 and EEPROM; raw VDD_5V_IN (pin 28) feeds only the heater.</text>
+<text x="68" y="488" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">No regulator on this board; I2C4 pull-ups are on the FMUM.</text>
+<text x="68" y="502" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">Every SPI signal has a ground neighbour on the flex.</text>
+<text x="68" y="516" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">Octagon ~24 mm with two half-round notches for the elastomer</text>
+<text x="68" y="530" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">isolation mount; white arrow = flight direction; M1-M4 = GND.</text>
+</svg>

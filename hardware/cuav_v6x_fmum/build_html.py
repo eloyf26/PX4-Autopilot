@@ -94,9 +94,30 @@ PHOTO_TOP = [  # on fmum_top_sd_side.jpg
 ]
 
 
+PHOTO_IMU_TOP = [  # imu_top_sensor_side.jpg
+    (45, 42, "BMI088 (IMU 1)"),
+    (41, 55, "ICM-42688-P (IMU 2)"),
+    (59, 47, "PNI MagI2C (RM3100)"),
+    (61, 39, "Sen-XY-f coil X"),
+    (63, 62, "Sen-XY-f coil Y"),
+    (53, 60, "Sen-Z-f coil"),
+    (42, 63, "ICP-20100 baro #1"),
+    (75, 53, "flight arrow"),
+]
+PHOTO_IMU_BOT = [  # imu_bottom_flex_side.jpg
+    (41, 52, "FLEX (mates FMUM J3)"),
+    (62, 43, "24LC64 cal EEPROM"),
+    (77, 52, "MOSFET '3400'"),
+    (24, 40, "470 Ω heater ×4"),
+    (83, 38, ""),
+    (24, 65, ""),
+    (83, 63, ""),
+]
+
+
 def photo(fig, path, marks, caption):
     pins = "".join(
-        f'<span class="mark" style="left:{x}%;top:{y}%"><i></i><b>{E(l)}</b></span>' for x, y, l in marks)
+        f'<span class="mark" style="left:{x}%;top:{y}%"><i></i>{"<b>" + E(l) + "</b>" if l else ""}</span>' for x, y, l in marks)
     return f'''<figure class="photo">
   <div class="photo-wrap"><img src="{b64img(path)}" alt="{E(caption)}">{pins}</div>
   <figcaption><span class="fig">{fig}</span> {E(caption)}</figcaption>
@@ -244,6 +265,31 @@ def features():
         f"<tr><td>{E(a)}</td><td>{E(b)}</td><td><span class='conf {c}'>{ {'hi':'HIGH','md':'MEDIUM','lo':'LOW'}[c] }</span></td></tr>" for c, a, b in items) + "</tbody></table></div>"
 
 
+def imu_table():
+    rows = []
+    for ref, part, pkg, pins in G.IMU_PARTS:
+        nets = ", ".join(f"{pn}={net}" for pn, net in pins if net)
+        rows.append(f"<tr><td class=mono>{E(ref)}</td><td>{E(part)}</td><td>{E(pkg)}</td><td class=dest>{E(nets)}</td></tr>")
+    return '<div class="tscroll"><table><thead><tr><th>ref</th><th>part</th><th>package</th><th>pin = net</th></tr></thead><tbody>' + "".join(rows) + "</tbody></table></div>"
+
+
+def imu_features():
+    items = [
+        ("hi", "Rectangular LGA, top left (sensor side)", "Bosch BMI088 accel + gyro — IMU 1 on SPI3, power domain 3."),
+        ("hi", "Small LGA below it", "TDK ICM-42688-P — IMU 2 on SPI2, domain 2."),
+        ("hi", "4 × 4 mm QFN, centre right", "PNI MagI2C, the controller of the RM3100 compass — I2C4 address 0x20."),
+        ("hi", "Two flat black bars marked PNI, one horizontal one vertical", "PNI Sen-XY-f sense coils for the X and Y axes, mounted at 90°."),
+        ("hi", "Black cube below the QFN", "PNI Sen-Z-f coil for the vertical axis."),
+        ("hi", "Metal lid with port hole, bottom left", "TDK ICP-20100 barometer #1 — I2C4 address 0x64 (AD0 high)."),
+        ("hi", "34-pin 0.4 mm connector labelled FLEX (flex side)", "Mating half of the FMUM's J3; a short FPC jumper links the two boards."),
+        ("hi", "SOIC-8 (flex side)", "24LC64 calibration EEPROM — I2C4 0x50; PX4 stores calibration, revision and ID here."),
+        ("hi", "Four large resistors marked 4700", "470 Ω heater resistors in parallel: 117 Ω across 5 V, about 0.21 W under the IMUs."),
+        ("hi", "SOT-23 marked 3400 beside a resistor silkscreen symbol", "N-channel MOSFET (AO3400 class): low-side switch for the heater, driven by the HEATER line (PB10)."),
+    ]
+    return '<div class="tscroll"><table><thead><tr><th>seen on the photo</th><th>what it is</th><th>confidence</th></tr></thead><tbody>' + "".join(
+        f"<tr><td>{E(a)}</td><td>{E(b)}</td><td><span class='conf {c}'>{ {'hi':'HIGH','md':'MEDIUM','lo':'LOW'}[c] }</span></td></tr>" for c, a, b in items) + "</tbody></table></div>"
+
+
 BOM = [
     ("U1", "STM32H743IIK6 / STM32H753IIK6", "UFBGA176+25", "✔ from marking + PX4 defconfig"),
     ("X1", "Hirose DF40C-100DP-0.4V(51)", "0.4 mm, 3 mm stack", "✔ DS-010; base side DF40HC(3.0)-100DS-0.4V(58)"),
@@ -265,6 +311,13 @@ BOM = [
     ("R-pull", "1.5 kΩ ×8 on I2C1-4", "0402", "✔ DS-010 requirement"),
     ("R-div", "10 kΩ ×10 (5 rails, 1:2)", "0402", "✔ PX4 scaling"),
     ("C", "100 nF ×~20, 2.2 µF ×2 (VCAP), 4.7-22 µF bulk", "0402/0603", "standard H7 decoupling"),
+    ("IMU U1", "Bosch BMI088", "LGA-16 3×4.5", "✔ IMU board"),
+    ("IMU U2", "TDK ICM-42688-P", "LGA-14 2.5×3", "✔ IMU board"),
+    ("IMU U3 + L1-L3", "PNI RM3100 set: MagI2C + 2× Sen-XY-f + 1× Sen-Z-f", "QFN 4×4 + coils", "✔ IMU board (PNI marking on coils)"),
+    ("IMU U4", "TDK ICP-20100", "LGA-10 2×2.5", "✔ IMU board, AD0 high → 0x64"),
+    ("IMU U5", "Microchip 24LC64", "SOIC-8", "✔ PX4 mtd.cpp"),
+    ("IMU Q1, R1-R4", "AO3400-class N-MOSFET + 4× 470 Ω (marked 4700)", "SOT-23, 1210", "✔ markings"),
+    ("IMU J1", "Hirose BM20B(0.8)-34DS-0.4V(53) + FPC jumper", "0.4 mm", "mates FMUM J3"),
 ]
 
 
@@ -286,6 +339,7 @@ def build():
     parts.append('''<header>
 <div class="eyebrow">board identification · reverse-engineered schematic</div>
 <h1>CUAV V6X FMUM — the plug-in brain of a Pixhawk V6X autopilot</h1>
+<p class="note"><b>Not official.</b> CUAV publishes no schematic of the V6X modules and the full Pixhawk FMUv6X reference schematics are Dronecode-member-only. This is an independent reconstruction: connectivity from the PX4 firmware that runs on this hardware, connector pinouts from the public Pixhawk standards, part identification from the photos.</p>
 <p class="lede">The board in your photos is the FMU core module of the CUAV Pixhawk V6X flight controller: an STM32H7 processor, memory, one IMU and one barometer on a 36 × 31 mm card that plugs into a base board through the Pixhawk Autopilot Bus. Below: what every visible part is, how the module works, and six schematic sheets rebuilt from the PX4 firmware that runs on it and the two public Pixhawk standards it implements.</p>
 <div class="idcard">
  <div><div class="k">silkscreen</div><div class="v">V6X_FMUM RC11 · 07-17/23</div></div>
@@ -305,6 +359,13 @@ def build():
     parts.append(features())
     parts.append('<p class="note" style="margin-top:16px"><b>Where the confidence comes from.</b> The module runs PX4\'s <code>px4_fmu-v6x</code> target and identifies itself as hardware type <code>V6X001</code> ("CUAV sensor set rev 1") through a resistor ladder. The PX4 board files for that target hard-code every MCU pin, SPI chip-select, data-ready line, I²C address and power-enable, so the connectivity below is read from the firmware rather than guessed from traces. Connector pinouts come from the Pixhawk DS-010 and DS-012 standards. Only regulator part numbers, passive values and two small ICs are inferred.</p>')
 
+    parts.append("<h3 id=imu>The second board: V6X IMU RC10</h3>")
+    parts.append('<p>The octagonal board on the other end of the FLEX cable is CUAV\'s IMU board (silkscreen <code>V6X IMU RC10</code>, 2022-09-20). It sits in an elastomer isolation mount — the two half-round notches and the four ground pads M1-M4 are the mount interface — so the inertial sensors ride on a damped mass while the processor board is bolted rigidly to the base. It has no regulators: every rail arrives over the flex.</p>')
+    parts.append('<div class="photos">' + photo("C", "photos/imu_top_sensor_side.jpg", PHOTO_IMU_TOP,
+                 "IMU board, sensor side: BMI088, ICM-42688-P, the RM3100 compass as controller plus three coils, barometer #1.")
+                 + photo("D", "photos/imu_bottom_flex_side.jpg", PHOTO_IMU_BOT,
+                 "IMU board, flex side: mating 34-pin connector, calibration EEPROM, four 470 Ω heater resistors and their MOSFET.") + "</div>")
+    parts.append(imu_features())
     parts.append("<h2 id=arch>2 · How the module works</h2>")
     parts.append('<p>Three boards, one system. Only 5 V and 3.3 V logic cross the connectors; everything that touches the outside world (transceivers, power switching, ESD) stays on the base board, which is what makes the module small and reusable across vendors.</p>')
     parts.append(blocks())
@@ -319,6 +380,7 @@ def build():
     parts.append(sensor_table())
 
     parts.append("<h2 id=sheets>3 · Schematic sheets</h2>")
+    parts.append('<p class="note"><b>KiCad project.</b> The same data is generated as a KiCad 8 project with five hierarchical sheets, embedded symbols and global-label connectivity: <code>hardware/cuav_v6x_fmum/kicad/cuav_v6x_fmum.kicad_pro</code> on the branch <code>claude/unknown-component-schematics-mdgis0</code> of your PX4-Autopilot fork. Open the .kicad_pro; click any net label and press ` to highlight it across sheets.</p>')
     parts.append('<p>Net names follow the Pixhawk standards, so they line up with the published base-board reference schematics. Blue = MCU pin, green = signal net, copper = power rail, grey = ground.</p>')
     parts.append(sheet("01_mcu_u1.svg", 1, "U1 microcontroller", "Every used pin of the STM32H7: peripheral function inside the symbol, net name outside, and where the net goes in the margin. Pins not shown are unconnected on the module."))
     parts.append(sheet("02_core_peripherals.svg", 2, "Core peripherals", "FRAM, secure element, microSD with its power switch, both crystals, RTC cell, status LEDs, USB lines, the hardware-ID ladder and the reset / boot / trace provisions."))
@@ -326,6 +388,7 @@ def build():
     parts.append(sheet("04_x1_pab_100pin.svg", 4, "X1 — Pixhawk Autopilot Bus, 100 pins", "Pin-by-pin with the MCU pin that drives each signal. Odd pins on one row, even on the other."))
     parts.append(sheet("05_x2_pab_50pin.svg", 5, "X2 — Pixhawk Autopilot Bus, 50 pins", "RMII Ethernet to the PHY on the base, the external SPI6 payload bus, and the pins the standard reserves but an FMUv6X module leaves unconnected."))
     parts.append(sheet("06_j3_imu_flex_34pin.svg", 6, "J3 — IMU flex connector, 34 pins", "Two SPI buses, I2C4, three switched 3.3 V rails, raw 5 V for the heater and the heater control line, with a ground between every signal group."))
+    parts.append(sheet("07_imu_board.svg", 7, "IMU board (V6X IMU RC10)", "Everything on the vibration-isolated board: the mating flex connector, BMI088, ICM-42688-P, the RM3100 controller with its three coils, barometer #1, the calibration EEPROM and the heater with its MOSFET."))
 
     parts.append("<h2 id=tables>4 · Pin tables</h2>")
     parts.append("<h3>U1 pin map (as configured by PX4 for this module)</h3>")
@@ -337,6 +400,8 @@ def build():
     parts.append("<h3>J3 — 34-pin IMU flex</h3>")
     parts.append(conn_table(G.J3))
 
+    parts.append("<h3>IMU board parts and nets</h3>")
+    parts.append(imu_table())
     parts.append("<h2 id=bom>5 · Parts list for a replica</h2>")
     parts.append(bom())
 

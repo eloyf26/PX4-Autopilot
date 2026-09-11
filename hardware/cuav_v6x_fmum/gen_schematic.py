@@ -265,6 +265,43 @@ J3 = {
     33: "SPI2_nCS1_IMU2", 34: "GND",
 }
 
+
+# --------------------------------------------------------------------------
+# IMU board "V6X IMU RC10" (2022-09-20), reached through J3 / the FPC.
+# (refdes, part, package, [(pin, net), ...]).  Empty net = left open.
+# --------------------------------------------------------------------------
+IMU_PARTS = [
+    ("U1", "Bosch BMI088 (IMU 1)", "LGA-16 3x4.5",
+     [("VDD", "VDD_3V3_SENSORS3"), ("VDDIO", "VDD_3V3_SENSORS3"), ("GND", "GND"), ("GNDIO", "GND"), ("PS", "GND"),
+      ("SCK", "SPI3_SCK_SENSOR3"), ("SDI", "SPI3_MOSI_SENSOR3"), ("SDO1", "SPI3_MISO_SENSOR3"), ("SDO2", "SPI3_MISO_SENSOR3"),
+      ("CSB1 (accel)", "SPI3_nCS1_BMI088_ACCEL"), ("CSB2 (gyro)", "SPI3_nCS2_BMI088_GYRO"),
+      ("INT1", ""), ("INT2", ""), ("INT3 (gyro)", "SPI3_DRDY2_BMI088_INT3_GYRO"), ("INT4", "")]),
+    ("U2", "TDK ICM-42688-P (IMU 2)", "LGA-14 2.5x3",
+     [("VDD", "VDD_3V3_SENSORS2"), ("VDDIO", "VDD_3V3_SENSORS2"), ("GND", "GND"),
+      ("SCLK", "SPI2_SCK_SENSOR2"), ("SDI", "SPI2_MOSI_SENSOR2"), ("SDO/AD0", "SPI2_MISO_SENSOR2"), ("nCS", "SPI2_nCS1_IMU2"),
+      ("INT1", "SPI2_DRDY2_IMU2_INT2"), ("INT2/FSYNC", "")]),
+    ("U3", "PNI MagI2C (RM3100 ASIC)", "QFN 4x4",
+     [("VDD", "VDD_3V3_SENSORS4"), ("AVDD", "VDD_3V3_SENSORS4"), ("GND", "GND"), ("I2C_EN", "VDD_3V3_SENSORS4"),
+      ("SA0", "GND"), ("SA1", "GND"), ("SCL", "I2C4_SCL_FMU"), ("SDA", "I2C4_SDA_FMU"), ("DRDY", ""),
+      ("LX+", "MAG_LX_A"), ("LX-", "MAG_LX_B"), ("LY+", "MAG_LY_A"), ("LY-", "MAG_LY_B"), ("LZ+", "MAG_LZ_A"), ("LZ-", "MAG_LZ_B")]),
+    ("L1", "PNI Sen-XY-f coil, X", "6.5x2.5", [("1", "MAG_LX_A"), ("2", "MAG_LX_B")]),
+    ("L2", "PNI Sen-XY-f coil, Y", "6.5x2.5", [("1", "MAG_LY_A"), ("2", "MAG_LY_B")]),
+    ("L3", "PNI Sen-Z-f coil, Z", "3.6x3.6x3.2", [("1", "MAG_LZ_A"), ("2", "MAG_LZ_B")]),
+    ("U4", "TDK ICP-20100 (baro 1)", "LGA-10 2x2.5",
+     [("VDD", "VDD_3V3_SENSORS4"), ("VDDIO", "VDD_3V3_SENSORS4"), ("GND", "GND"), ("SCL", "I2C4_SCL_FMU"), ("SDA", "I2C4_SDA_FMU"),
+      ("AD0", "VDD_3V3_SENSORS4"), ("CSB", "VDD_3V3_SENSORS4"), ("INT", "")]),
+    ("U5", "Microchip 24LC64 cal. EEPROM", "SOIC-8",
+     [("VCC", "VDD_3V3_SENSORS4"), ("VSS", "GND"), ("A0", "GND"), ("A1", "GND"), ("A2", "GND"), ("WP", "GND"),
+      ("SCL", "I2C4_SCL_FMU"), ("SDA", "I2C4_SDA_FMU")]),
+    ("Q1", "N-MOSFET, marked 3400 (AO3400 class)", "SOT-23", [("G", "HEATER"), ("D", "HEATER_SW"), ("S", "GND")]),
+    ("R1", "470 R heater (marked 4700)", "1210", [("1", "VDD_5V_IN"), ("2", "HEATER_SW")]),
+    ("R2", "470 R heater (marked 4700)", "1210", [("1", "VDD_5V_IN"), ("2", "HEATER_SW")]),
+    ("R3", "470 R heater (marked 4700)", "1210", [("1", "VDD_5V_IN"), ("2", "HEATER_SW")]),
+    ("R4", "470 R heater (marked 4700)", "1210", [("1", "VDD_5V_IN"), ("2", "HEATER_SW")]),
+    ("R5", "100k gate pull-down", "0402", [("1", "HEATER"), ("2", "GND")]),
+]
+IMU_ADDR = {"U3": "0x20", "U4": "0x64 (AD0 = 1)", "U5": "0x50"}
+
 POWER_NETS = {"VDD_5V_IN", "FMU_VDD_3V3", "V_RTC_BAT", "VDD_3V3_SENSORS1",
               "VDD_3V3_SENSORS2", "VDD_3V3_SENSORS3", "VDD_3V3_SENSORS4",
               "VDD_3V3_SD", "VBUS_SENSE"}
@@ -736,6 +773,81 @@ def sheet_j3():
         ])
 
 
+
+# --------------------------------------------------------------------------
+# Sheet 7 : the IMU board reached through the flex
+# --------------------------------------------------------------------------
+def sheet_imu():
+    W, H = 1720, 1180
+    svg = SVG(W, H, "Sheet 7 · IMU board 'V6X IMU RC10' (2022-09-20)", "vibration-isolated sensor carrier on the other end of the J3 flex: BMI088, ICM-42688-P, RM3100, ICP-20100 #1, 24LC64, heater")
+    parts = {p[0]: p for p in IMU_PARTS}
+
+    def dp(ref, x, y, w, left_n, desc=""):
+        r, part, pkg, pins = parts[ref]
+        left = [(pn, net, m(net) if (net and not net.startswith("MAG_") and net not in POWER_NETS and net != "GND" and net != "HEATER_SW") else None) for pn, net in pins[:left_n]]
+        right = [(pn, net, None) for pn, net in pins[left_n:]]
+        return draw_part(svg, x, y, w, ref, f"{part}  {pkg}", desc, left, right)
+
+    # J1: mating half of the flex
+    cx, top, pitch = 330, 70, 16.5
+    svg.rect(cx, top - 30, 140, 17 * pitch + 50)
+    svg.text(cx + 70, top - 14, "J1  (IMU side of the flex)", 11, C["sym"], "middle", "700")
+    svg.text(cx + 70, top - 2, "BM20B(0.8)-34DS-0.4V(53) mating half; same pin numbers as FMUM J3", 8.5, C["muted"], "middle")
+    for r in range(17):
+        yy = top + 16 + r * pitch
+        for side in (0, 1):
+            pin = 2 * r + 1 + side
+            net = J3[pin]
+            col = net_color(net)
+            if side == 0:
+                svg.line(cx - 28, yy, cx, yy, col); svg.text(cx + 6, yy + 3.5, str(pin), 9.5, C["ink"])
+                if net == "GND": svg.gnd(cx - 28, yy)
+                else: svg.text(cx - 33, yy + 3.5, net, 9.5, col, "end", "600")
+            else:
+                svg.line(cx + 140, yy, cx + 168, yy, col); svg.text(cx + 134, yy + 3.5, str(pin), 9.5, C["ink"], "end")
+                if net == "GND": svg.gnd(cx + 168, yy)
+                else: svg.text(cx + 173, yy + 3.5, net, 9.5, col, "start", "600")
+
+    dp("U1", 780, 60, 190, 9, "IMU 1 on SPI3, domain 3; PS = GND selects SPI. Both SDO pins share MISO (tri-state when its CS is high). PX4 rotation YAW_180 (-R 4)")
+    dp("U2", 880, 400, 190, 7, "IMU 2 on SPI2, domain 2. PX4 rotation YAW_270 (-R 6)")
+    dp("U3", 1320, 60, 190, 9, "RM3100 controller: I2C mode, SA1=SA0=0 -> 0x20. Three sense coils below")
+    y = 360
+    for ref in ("L1", "L2", "L3"):
+        r, part, pkg, pins = parts[ref]
+        svg.rect(1335, y, 160, 26, "#fff", C["sym"], 1)
+        svg.text(1415, y + 17, f"{ref}  {part}", 9.5, C["ink"], "middle", "600")
+        svg.line(1315, y + 13, 1335, y + 13); svg.line(1495, y + 13, 1515, y + 13)
+        svg.text(1310, y + 17, pins[0][1], 9, C["wire"], "end", "600"); svg.text(1520, y + 17, pins[1][1], 9, C["wire"], "start", "600")
+        y += 40
+    svg.text(1250, y + 10, "Sen-XY-f: 6.5 x 2.5 mm flat coils, X and Y at 90 deg. Sen-Z-f: 3.6 mm cube, vertical axis.", 9, C["muted"])
+    dp("U4", 1320, 560, 190, 5, "Baro 1 on I2C4, AD0 = 1 -> 0x64 (baro 2 on the FMUM uses AD0 = 0 -> 0x63)")
+    dp("U5", 1320, 760, 190, 6, "PX4 'imu_eeprom': calibration data, MFT revision, ID (mtd.cpp)")
+    # heater
+    hx, hy = 780, 680
+    svg.text(hx, hy, "IMU heater", 12, C["sym"], "start", "700", FONT_UI)
+    svg.text(hx, hy + 18, "Four 470 R (marked 4700) in parallel = 117 R across VDD_5V_IN -> 0.21 W of heating right under the IMUs.", 9.5, C["ink"])
+    svg.text(hx, hy + 32, "Q1 (SOT-23, marked 3400) switches the low side from the HEATER line (PB10 on the FMUM, PWM/on-off).", 9.5, C["ink"])
+    for i in range(4):
+        rx = hx + 40 + i * 70
+        svg.line(rx, hy + 60, rx, hy + 72, C["power"]); svg.rect(rx - 8, hy + 72, 16, 36, "#fff", C["sym"], 1)
+        svg.text(rx, hy + 94, "470", 8.5, C["ink"], "middle"); svg.text(rx, hy + 122, f"R{i+1}", 8.5, C["muted"], "middle")
+        svg.line(rx, hy + 108, rx, hy + 130, C["wire"])
+    svg.line(hx + 40, hy + 60, hx + 250, hy + 60, C["power"]); svg.text(hx + 258, hy + 64, "VDD_5V_IN  (J1-28)", 9.5, C["power"], "start", "600")
+    svg.line(hx + 40, hy + 130, hx + 250, hy + 130, C["wire"]); svg.text(hx + 258, hy + 134, "HEATER_SW", 9.5, C["wire"], "start", "600")
+    for i in range(4):
+        svg.dot(hx + 40 + i * 70, hy + 60, 2.2, C["power"]); svg.dot(hx + 40 + i * 70, hy + 130)
+    dp("Q1", 800, hy + 160, 120, 1, "low-side switch; R5 100k keeps it off while the FMU boots")
+    svg.note(60, 430, [
+        "All rails come over the flex: SENSORS3 (pin 6) -> BMI088,",
+        "SENSORS2 (pin 32) -> ICM-42688-P, SENSORS4 (pin 16) -> compass,",
+        "baro 1 and EEPROM; raw VDD_5V_IN (pin 28) feeds only the heater.",
+        "No regulator on this board; I2C4 pull-ups are on the FMUM.",
+        "Every SPI signal has a ground neighbour on the flex.",
+        "Octagon ~24 mm with two half-round notches for the elastomer",
+        "isolation mount; white arrow = flight direction; M1-M4 = GND.",
+    ], 430, 9.5)
+    return svg.save("07_imu_board.svg")
+
 # --------------------------------------------------------------------------
 # netlist.csv
 # --------------------------------------------------------------------------
@@ -749,6 +861,9 @@ def write_netlist():
         rows.append(("X2", str(p), "PAB 50-pin", net, "n.c. on FMUv6X" if net in X2_NC else (", ".join(NET_TO_MCU.get(net, [])) or ("rail" if net in POWER_NETS or net == "GND" else ""))))
     for p, net in J3.items():
         rows.append(("J3", str(p), "IMU flex 34-pin", net, ", ".join(NET_TO_MCU.get(net, [])) or ("rail" if net in POWER_NETS or net == "GND" else "")))
+    for ref, part, pkg, pins in IMU_PARTS:
+        for pn, net in pins:
+            rows.append((f"IMU:{ref}", pn, part, net or "n.c.", ", ".join(NET_TO_MCU.get(net, [])) if net and net not in POWER_NETS and net != "GND" else ("rail" if net in POWER_NETS or net == "GND" else "")))
     with open(os.path.join(HERE, "netlist.csv"), "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["refdes", "pin", "function", "net", "connects_to"])
@@ -758,7 +873,7 @@ def write_netlist():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    out = [sheet_mcu(), sheet_core(), sheet_power_sensors(), sheet_x1(), sheet_x2(), sheet_j3()]
+    out = [sheet_mcu(), sheet_core(), sheet_power_sensors(), sheet_x1(), sheet_x2(), sheet_j3(), sheet_imu()]
     n = write_netlist()
     for p in out:
         print("wrote", os.path.relpath(p, HERE))

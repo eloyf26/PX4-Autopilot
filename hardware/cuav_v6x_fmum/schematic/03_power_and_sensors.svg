@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" width="1600" height="1080" font-family="'IBM Plex Mono', 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11">
+<rect x="0" y="0" width="1600" height="1080" fill="#fbfaf6" stroke="#2b3a4a" stroke-width="2"/>
+<rect x="866" y="1004" width="720" height="62" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.2"/>
+<text x="876" y="1026" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d232b">Sheet 3 · Power domains and on-module sensors</text>
+<text x="876" y="1044" font-size="10.5" fill="#1d232b">VDD_5V_IN -&gt; FMU 3.3 V rail; four switched sensor LDOs with ADC supervision; IMU3, BARO2, heater driver</text>
+<text x="876" y="1058" font-size="9.5" fill="#7a828c">CUAV V6X FMUM (RC11, 07-2023) · reverse-engineered from PX4 fmu-v6x board files + Pixhawk DS-010/DS-012 · not vendor data</text>
+<rect x="330" y="60" width="170" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="415.0" y="77" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_REG</text>
+<text x="335" y="99.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VIN</text>
+<line x1="308" y1="96" x2="330" y2="96" stroke="#b8442c" stroke-width="1.3"/>
+<text x="304" y="99.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_5V_IN</text>
+<text x="335" y="115.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">EN</text>
+<line x1="308" y1="112" x2="330" y2="112" stroke="#b8442c" stroke-width="1.3"/>
+<text x="304" y="115.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_5V_IN</text>
+<text x="335" y="131.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="308" y1="128" x2="330" y2="128" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="308" y1="128" x2="308" y2="134" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="301" y1="134" x2="315" y2="134" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="303.5" y1="137.5" x2="312.5" y2="137.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="306" y1="141" x2="310" y2="141" stroke="#6b7280" stroke-width="1.3"/>
+<text x="495" y="99.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VOUT</text>
+<line x1="500" y1="96" x2="522" y2="96" stroke="#b8442c" stroke-width="1.3"/>
+<text x="526" y="99.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">FMU_VDD_3V3</text>
+<text x="415.0" y="157" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">3.3 V step-down, ~1 A (QFN + 2.2 uH inductor, bottom-centre of MCU side)</text>
+<text x="415.0" y="170" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">always on. Feeds U1, FRAM, SE050, LEDs, SD switch and X1-84/86</text>
+<text x="330" y="200" font-size="9.5" fill="#7a828c" text-anchor="start" font-weight="400">VDD_5V_IN arrives on X1-49/51/53/55 (4 pins, 1.5 A budget) and also leaves to the IMU board on J3-28 for the heater.</text>
+<text x="330" y="215" font-size="9.5" fill="#7a828c" text-anchor="start" font-weight="400">Input: 2x 10 uF + 100 nF. Output: 22 uF + 100 nF. FMU_VDD_3V3 is exported so the base can power its EEPROM / LEDs / pull-ups.</text>
+<rect x="330" y="270" width="150" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="405.0" y="287" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_LDO1</text>
+<text x="335" y="309.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VIN</text>
+<line x1="308" y1="306" x2="330" y2="306" stroke="#b8442c" stroke-width="1.3"/>
+<text x="304" y="309.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_5V_IN</text>
+<text x="335" y="325.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">EN</text>
+<line x1="308" y1="322" x2="330" y2="322" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="325.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">VDD_3V3_SENSORS1_EN  [PI11]</text>
+<text x="335" y="341.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="308" y1="338" x2="330" y2="338" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="308" y1="338" x2="308" y2="344" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="301" y1="344" x2="315" y2="344" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="303.5" y1="347.5" x2="312.5" y2="347.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="306" y1="351" x2="310" y2="351" stroke="#6b7280" stroke-width="1.3"/>
+<text x="475" y="309.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VOUT</text>
+<line x1="480" y1="306" x2="502" y2="306" stroke="#b8442c" stroke-width="1.3"/>
+<text x="506" y="309.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS1</text>
+<text x="405.0" y="367" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">3.3 V LDO 300 mA w/ EN (SOT-23-5, e.g. TLV75533 / RT9080)</text>
+<text x="405.0" y="380" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">domain 1: IMU3 ICM-20649 (on module, SPI1)</text>
+<line x1="630" y1="306" x2="690" y2="306" stroke="#b8442c" stroke-width="1.3"/>
+<text x="692" y="310" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS1</text>
+<line x1="660" y1="306" x2="660" y2="320" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="652" y="320" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="674" y="338" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="660" y1="350" x2="660" y2="370" stroke="#0b6e4f" stroke-width="1.3"/>
+<circle cx="660" cy="360" r="2.2" fill="#0b6e4f"/>
+<line x1="660" y1="360" x2="710" y2="360" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="714" y="364" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SCALED_VDD_3V3_SENSORS1  [PA0]  (ADC1)</text>
+<rect x="652" y="370" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="674" y="388" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="660" y1="400" x2="660" y2="410" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="660" y1="410" x2="660" y2="416" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="653" y1="416" x2="667" y2="416" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="655.5" y1="419.5" x2="664.5" y2="419.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="658" y1="423" x2="662" y2="423" stroke="#6b7280" stroke-width="1.3"/>
+<text x="590" y="442" font-size="8.5" fill="#7a828c" text-anchor="start" font-weight="400">10k/10k divider -&gt; 1.65 V nominal at ADC1</text>
+<rect x="990" y="270" width="150" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1065.0" y="287" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_LDO2</text>
+<text x="995" y="309.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VIN</text>
+<line x1="968" y1="306" x2="990" y2="306" stroke="#b8442c" stroke-width="1.3"/>
+<text x="964" y="309.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_5V_IN</text>
+<text x="995" y="325.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">EN</text>
+<line x1="968" y1="322" x2="990" y2="322" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="964" y="325.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">VDD_3V3_SENSORS2_EN  [PF4]</text>
+<text x="995" y="341.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="968" y1="338" x2="990" y2="338" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="968" y1="338" x2="968" y2="344" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="961" y1="344" x2="975" y2="344" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="963.5" y1="347.5" x2="972.5" y2="347.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="966" y1="351" x2="970" y2="351" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1135" y="309.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VOUT</text>
+<line x1="1140" y1="306" x2="1162" y2="306" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1166" y="309.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS2</text>
+<text x="1065.0" y="367" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">3.3 V LDO 300 mA w/ EN (SOT-23-5, e.g. TLV75533 / RT9080)</text>
+<text x="1065.0" y="380" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">domain 2: IMU2 ICM-42688-P (IMU board, SPI2) -&gt; J3-32</text>
+<line x1="1290" y1="306" x2="1350" y2="306" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1352" y="310" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS2</text>
+<line x1="1320" y1="306" x2="1320" y2="320" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="1312" y="320" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1334" y="338" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="1320" y1="350" x2="1320" y2="370" stroke="#0b6e4f" stroke-width="1.3"/>
+<circle cx="1320" cy="360" r="2.2" fill="#0b6e4f"/>
+<line x1="1320" y1="360" x2="1370" y2="360" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1374" y="364" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SCALED_VDD_3V3_SENSORS2  [PA4]  (ADC1)</text>
+<rect x="1312" y="370" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1334" y="388" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="1320" y1="400" x2="1320" y2="410" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="1320" y1="410" x2="1320" y2="416" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1313" y1="416" x2="1327" y2="416" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1315.5" y1="419.5" x2="1324.5" y2="419.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1318" y1="423" x2="1322" y2="423" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1250" y="442" font-size="8.5" fill="#7a828c" text-anchor="start" font-weight="400">10k/10k divider -&gt; 1.65 V nominal at ADC1</text>
+<rect x="330" y="480" width="150" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="405.0" y="497" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_LDO3</text>
+<text x="335" y="519.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VIN</text>
+<line x1="308" y1="516" x2="330" y2="516" stroke="#b8442c" stroke-width="1.3"/>
+<text x="304" y="519.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_5V_IN</text>
+<text x="335" y="535.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">EN</text>
+<line x1="308" y1="532" x2="330" y2="532" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="535.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">VDD_3V3_SENSORS3_EN  [PE7]</text>
+<text x="335" y="551.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="308" y1="548" x2="330" y2="548" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="308" y1="548" x2="308" y2="554" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="301" y1="554" x2="315" y2="554" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="303.5" y1="557.5" x2="312.5" y2="557.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="306" y1="561" x2="310" y2="561" stroke="#6b7280" stroke-width="1.3"/>
+<text x="475" y="519.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VOUT</text>
+<line x1="480" y1="516" x2="502" y2="516" stroke="#b8442c" stroke-width="1.3"/>
+<text x="506" y="519.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS3</text>
+<text x="405.0" y="577" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">3.3 V LDO 300 mA w/ EN (SOT-23-5, e.g. TLV75533 / RT9080)</text>
+<text x="405.0" y="590" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">domain 3: IMU1 BMI088 (IMU board, SPI3) -&gt; J3-6</text>
+<line x1="630" y1="516" x2="690" y2="516" stroke="#b8442c" stroke-width="1.3"/>
+<text x="692" y="520" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS3</text>
+<line x1="660" y1="516" x2="660" y2="530" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="652" y="530" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="674" y="548" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="660" y1="560" x2="660" y2="580" stroke="#0b6e4f" stroke-width="1.3"/>
+<circle cx="660" cy="570" r="2.2" fill="#0b6e4f"/>
+<line x1="660" y1="570" x2="710" y2="570" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="714" y="574" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SCALED_VDD_3V3_SENSORS3  [PB0]  (ADC1)</text>
+<rect x="652" y="580" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="674" y="598" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="660" y1="610" x2="660" y2="620" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="660" y1="620" x2="660" y2="626" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="653" y1="626" x2="667" y2="626" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="655.5" y1="629.5" x2="664.5" y2="629.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="658" y1="633" x2="662" y2="633" stroke="#6b7280" stroke-width="1.3"/>
+<text x="590" y="652" font-size="8.5" fill="#7a828c" text-anchor="start" font-weight="400">10k/10k divider -&gt; 1.65 V nominal at ADC1</text>
+<rect x="990" y="480" width="150" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1065.0" y="497" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_LDO4</text>
+<text x="995" y="519.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VIN</text>
+<line x1="968" y1="516" x2="990" y2="516" stroke="#b8442c" stroke-width="1.3"/>
+<text x="964" y="519.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_5V_IN</text>
+<text x="995" y="535.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">EN</text>
+<line x1="968" y1="532" x2="990" y2="532" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="964" y="535.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">VDD_3V3_SENSORS4_EN  [PG8]</text>
+<text x="995" y="551.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="968" y1="548" x2="990" y2="548" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="968" y1="548" x2="968" y2="554" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="961" y1="554" x2="975" y2="554" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="963.5" y1="557.5" x2="972.5" y2="557.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="966" y1="561" x2="970" y2="561" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1135" y="519.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VOUT</text>
+<line x1="1140" y1="516" x2="1162" y2="516" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1166" y="519.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS4</text>
+<text x="1065.0" y="577" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">3.3 V LDO 300 mA w/ EN (SOT-23-5, e.g. TLV75533 / RT9080)</text>
+<text x="1065.0" y="590" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">domain 4: I2C4 devices: RM3100, ICP-20100 #1, EEPROM (IMU board) -&gt; J3-16</text>
+<line x1="1290" y1="516" x2="1350" y2="516" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1352" y="520" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS4</text>
+<line x1="1320" y1="516" x2="1320" y2="530" stroke="#b8442c" stroke-width="1.3"/>
+<rect x="1312" y="530" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1334" y="548" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="1320" y1="560" x2="1320" y2="580" stroke="#0b6e4f" stroke-width="1.3"/>
+<circle cx="1320" cy="570" r="2.2" fill="#0b6e4f"/>
+<line x1="1320" y1="570" x2="1370" y2="570" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1374" y="574" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SCALED_VDD_3V3_SENSORS4  [PF12]  (ADC1)</text>
+<rect x="1312" y="580" width="16" height="30" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1334" y="598" font-size="9" fill="#1d232b" text-anchor="start" font-weight="400">10k</text>
+<line x1="1320" y1="610" x2="1320" y2="620" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="1320" y1="620" x2="1320" y2="626" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1313" y1="626" x2="1327" y2="626" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1315.5" y1="629.5" x2="1324.5" y2="629.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1318" y1="633" x2="1322" y2="633" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1250" y="652" font-size="8.5" fill="#7a828c" text-anchor="start" font-weight="400">10k/10k divider -&gt; 1.65 V nominal at ADC1</text>
+<text x="330" y="700" font-size="9.5" fill="#7a828c" text-anchor="start" font-weight="400">SCALED_V5 [PB1 / ADC1_INP5]: VDD_5V_IN through 10k / 10k divider (2.5 V nominal). PX4 reports it as the 5 V rail voltage.</text>
+<rect x="330" y="740" width="170" height="132" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="415.0" y="757" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_IMU3</text>
+<text x="335" y="779.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">nCS</text>
+<line x1="308" y1="776" x2="330" y2="776" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="779.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI1_nCS1_IMU3  [PI9]</text>
+<text x="335" y="795.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCLK</text>
+<line x1="308" y1="792" x2="330" y2="792" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="795.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI1_SCK_SENSOR1  [PA5]</text>
+<text x="335" y="811.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDI</text>
+<line x1="308" y1="808" x2="330" y2="808" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="811.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI1_MOSI_SENSOR1  [PB5]</text>
+<text x="335" y="827.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDO/AD0</text>
+<line x1="308" y1="824" x2="330" y2="824" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="827.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI1_MISO_SENSOR1  [PG9]</text>
+<text x="335" y="843.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">INT1</text>
+<line x1="308" y1="840" x2="330" y2="840" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="304" y="843.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI1_DRDY1_IMU3_INT1  [PF2]</text>
+<text x="335" y="859.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="308" y1="856" x2="330" y2="856" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="308" y1="856" x2="308" y2="862" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="301" y1="862" x2="315" y2="862" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="303.5" y1="865.5" x2="312.5" y2="865.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="306" y1="869" x2="310" y2="869" stroke="#6b7280" stroke-width="1.3"/>
+<text x="495" y="779.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VDD</text>
+<line x1="500" y1="776" x2="522" y2="776" stroke="#b8442c" stroke-width="1.3"/>
+<text x="526" y="779.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS1</text>
+<text x="495" y="795.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VDDIO</text>
+<line x1="500" y1="792" x2="522" y2="792" stroke="#b8442c" stroke-width="1.3"/>
+<text x="526" y="795.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS1</text>
+<text x="495" y="811.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">REGOUT</text>
+<text x="495" y="827.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">FSYNC</text>
+<line x1="500" y1="824" x2="522" y2="824" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="522" y1="824" x2="522" y2="830" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="515" y1="830" x2="529" y2="830" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="517.5" y1="833.5" x2="526.5" y2="833.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="520" y1="837" x2="524" y2="837" stroke="#6b7280" stroke-width="1.3"/>
+<text x="415.0" y="885" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">TDK ICM-20649  QFN-24 3x3 (top-centre, MCU side)</text>
+<text x="415.0" y="898" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">6-axis IMU #3, SPI1 mode 3, up to 7 MHz; PX4 rotation ROTATION_ROLL_180_YAW_270 (-R 14)</text>
+<text x="330" y="920" font-size="9" fill="#7a828c" text-anchor="start" font-weight="400">REGOUT: 100 nF to GND. VDD/VDDIO: 100 nF each. Decoupling right at the pins.</text>
+<rect x="1000" y="740" width="170" height="100" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1085.0" y="757" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_BARO2</text>
+<text x="1005" y="779.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDA</text>
+<line x1="978" y1="776" x2="1000" y2="776" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="974" y="779.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C2_SDA_BASE  [PF0]</text>
+<text x="1005" y="795.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCL</text>
+<line x1="978" y1="792" x2="1000" y2="792" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="974" y="795.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C2_SCL_BASE  [PF1]</text>
+<text x="1005" y="811.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">INT</text>
+<line x1="978" y1="808" x2="1000" y2="808" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="974" y="811.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C2_DRDY1_BARO2  [PG5]</text>
+<text x="1005" y="827.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="978" y1="824" x2="1000" y2="824" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="978" y1="824" x2="978" y2="830" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="971" y1="830" x2="985" y2="830" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="973.5" y1="833.5" x2="982.5" y2="833.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="976" y1="837" x2="980" y2="837" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1165" y="779.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VDD</text>
+<line x1="1170" y1="776" x2="1192" y2="776" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1196" y="779.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS2</text>
+<text x="1165" y="795.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VDDIO</text>
+<line x1="1170" y1="792" x2="1192" y2="792" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1196" y="795.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SENSORS2</text>
+<text x="1165" y="811.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">AD0</text>
+<line x1="1170" y1="808" x2="1192" y2="808" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1192" y1="808" x2="1192" y2="814" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1185" y1="814" x2="1199" y2="814" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1187.5" y1="817.5" x2="1196.5" y2="817.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="1190" y1="821" x2="1194" y2="821" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1165" y="827.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">I2C/SPI sel</text>
+<line x1="1170" y1="824" x2="1192" y2="824" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1196" y="827.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">FMU_VDD_3V3</text>
+<text x="1085.0" y="853" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">TDK ICP-20100  LGA-10 2.0x2.5 metal lid (in the slotted island)</text>
+<text x="1085.0" y="866" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">barometer #2, I2C2 addr 0x63; PX4 driver icp201xx -X (external bus 2)</text>
+<text x="1000" y="905" font-size="9" fill="#7a828c" text-anchor="start" font-weight="400">The routed slot around it is mechanical stress relief: PCB flex would otherwise show up as pressure error.</text>
+<text x="1000" y="919" font-size="9" fill="#7a828c" text-anchor="start" font-weight="400">I2C2 is shared with the base (GPS2 / power monitor 2 connectors) and has 1.5k pull-ups to FMU_VDD_3V3 on the module.</text>
+<rect x="1060" y="60" width="400" height="68" fill="#fffbea" stroke="#a16207" stroke-width="1" rx="0"/>
+<text x="1068" y="76" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">HEATER [PB10, TIM2_CH3 capable] runs straight to J3-30.</text>
+<text x="1068" y="90" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">The switching MOSFET and the heating resistors sit on the IMU board,</text>
+<text x="1068" y="104" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">fed from raw VDD_5V_IN on J3-28. PX4 drives it as a slow PWM/on-off</text>
+<text x="1068" y="118" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">output (GPIO_HEATER_OUTPUT) to hold the IMUs at a set temperature.</text>
+<rect x="1000" y="940" width="410" height="40" fill="#fffbea" stroke="#a16207" stroke-width="1" rx="0"/>
+<text x="1008" y="956" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">I2C pull-ups (1.5k to FMU_VDD_3V3, required by DS-010) live on the FMUM for</text>
+<text x="1008" y="970" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">I2C1 (PB8/PB9), I2C2 (PF0/PF1), I2C3 (PA8/PH8) and I2C4 (PF14/PF15).</text>
+</svg>

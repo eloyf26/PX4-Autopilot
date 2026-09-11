@@ -1,0 +1,250 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1120" width="1500" height="1120" font-family="'IBM Plex Mono', 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11">
+<rect x="0" y="0" width="1500" height="1120" fill="#fbfaf6" stroke="#2b3a4a" stroke-width="2"/>
+<rect x="766" y="1044" width="720" height="62" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.2"/>
+<text x="776" y="1066" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" fill="#1d232b">Sheet 2 · Core peripherals on the module</text>
+<text x="776" y="1084" font-size="10.5" fill="#1d232b">FRAM, secure element, microSD, crystals, LEDs, RTC backup cell, USB, HW-ID ladder, trace pads</text>
+<text x="776" y="1098" font-size="9.5" fill="#7a828c">CUAV V6X FMUM (RC11, 07-2023) · reverse-engineered from PX4 fmu-v6x board files + Pixhawk DS-010/DS-012 · not vendor data</text>
+<rect x="250" y="40" width="150" height="100" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="325.0" y="57" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_FRAM</text>
+<text x="255" y="79.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">nCS</text>
+<line x1="228" y1="76" x2="250" y2="76" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="79.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI5_nCS1_FRAM  [PG7]</text>
+<text x="255" y="95.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SO</text>
+<line x1="228" y1="92" x2="250" y2="92" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="95.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SPI5_MISO_FRAM  [PH7]</text>
+<text x="255" y="111.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">nWP</text>
+<line x1="228" y1="108" x2="250" y2="108" stroke="#b8442c" stroke-width="1.3"/>
+<text x="224" y="111.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">FMU_VDD_3V3</text>
+<text x="255" y="127.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VSS</text>
+<line x1="228" y1="124" x2="250" y2="124" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="228" y1="124" x2="228" y2="130" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="221" y1="130" x2="235" y2="130" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="223.5" y1="133.5" x2="232.5" y2="133.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="226" y1="137" x2="230" y2="137" stroke="#6b7280" stroke-width="1.3"/>
+<text x="395" y="79.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VDD</text>
+<line x1="400" y1="76" x2="422" y2="76" stroke="#b8442c" stroke-width="1.3"/>
+<text x="426" y="79.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">FMU_VDD_3V3</text>
+<text x="395" y="95.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">nHOLD</text>
+<line x1="400" y1="92" x2="422" y2="92" stroke="#b8442c" stroke-width="1.3"/>
+<text x="426" y="95.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">FMU_VDD_3V3</text>
+<text x="395" y="111.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">SCK</text>
+<line x1="400" y1="108" x2="422" y2="108" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="426" y="111.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI5_SCK_FRAM  [PF7]</text>
+<text x="395" y="127.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">SI</text>
+<line x1="400" y1="124" x2="422" y2="124" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="426" y="127.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">SPI5_MOSI_FRAM  [PF11]</text>
+<text x="325.0" y="153" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">FM25V02A-DG  SOIC-8 (256 kbit FRAM)</text>
+<text x="325.0" y="166" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">PX4 parameters. SPI5 @ up to 40 MHz</text>
+<rect x="250" y="225" width="150" height="100" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="325.0" y="242" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">U_SE</text>
+<text x="255" y="264.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SDA</text>
+<line x1="228" y1="261" x2="250" y2="261" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="264.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SDA_FMU  [PF15]</text>
+<text x="255" y="280.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SCL</text>
+<line x1="228" y1="277" x2="250" y2="277" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="280.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">I2C4_SCL_FMU  [PF14]</text>
+<text x="255" y="296.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">ENA</text>
+<line x1="228" y1="293" x2="250" y2="293" stroke="#b8442c" stroke-width="1.3"/>
+<text x="224" y="296.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">FMU_VDD_3V3</text>
+<text x="255" y="312.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="228" y1="309" x2="250" y2="309" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="228" y1="309" x2="228" y2="315" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="221" y1="315" x2="235" y2="315" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="223.5" y1="318.5" x2="232.5" y2="318.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="226" y1="322" x2="230" y2="322" stroke="#6b7280" stroke-width="1.3"/>
+<text x="395" y="264.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VDD</text>
+<line x1="400" y1="261" x2="422" y2="261" stroke="#b8442c" stroke-width="1.3"/>
+<text x="426" y="264.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">FMU_VDD_3V3</text>
+<text x="395" y="280.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VIN</text>
+<line x1="400" y1="277" x2="422" y2="277" stroke="#b8442c" stroke-width="1.3"/>
+<text x="426" y="280.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">FMU_VDD_3V3</text>
+<text x="395" y="296.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">IO1</text>
+<text x="395" y="312.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">IO2</text>
+<text x="325.0" y="338" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">NXP SE050C1  HX2QFN-20 3x3 (likely, marked &#x27;S50&#x27;)</text>
+<text x="325.0" y="351" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">secure element, I2C4 addr 0x48 (PX4_I2C_OBDEV_SE050)</text>
+<rect x="250" y="410" width="150" height="164" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="325.0" y="427" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">J4</text>
+<text x="255" y="449.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">DAT2</text>
+<line x1="228" y1="446" x2="250" y2="446" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="449.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SD_D2  [PG11]</text>
+<text x="255" y="465.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">CD/DAT3</text>
+<line x1="228" y1="462" x2="250" y2="462" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="465.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SD_D3  [PB4]</text>
+<text x="255" y="481.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">CMD</text>
+<line x1="228" y1="478" x2="250" y2="478" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="481.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SD_CMD  [PD7]</text>
+<text x="255" y="497.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VDD</text>
+<line x1="228" y1="494" x2="250" y2="494" stroke="#b8442c" stroke-width="1.3"/>
+<text x="224" y="497.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VDD_3V3_SD</text>
+<text x="255" y="513.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">CLK</text>
+<line x1="228" y1="510" x2="250" y2="510" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="513.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SD_CLK  [PD6]</text>
+<text x="255" y="529.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VSS</text>
+<line x1="228" y1="526" x2="250" y2="526" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="228" y1="526" x2="228" y2="532" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="221" y1="532" x2="235" y2="532" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="223.5" y1="535.5" x2="232.5" y2="535.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="226" y1="539" x2="230" y2="539" stroke="#6b7280" stroke-width="1.3"/>
+<text x="255" y="545.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">DAT0</text>
+<line x1="228" y1="542" x2="250" y2="542" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="545.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SD_D0  [PB14]</text>
+<text x="255" y="561.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">DAT1</text>
+<line x1="228" y1="558" x2="250" y2="558" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="224" y="561.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">SD_D1  [PB15]</text>
+<text x="395" y="449.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">SHIELD</text>
+<line x1="400" y1="446" x2="422" y2="446" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="422" y1="446" x2="422" y2="452" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="415" y1="452" x2="429" y2="452" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="417.5" y1="455.5" x2="426.5" y2="455.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="420" y1="459" x2="424" y2="459" stroke="#6b7280" stroke-width="1.3"/>
+<text x="325.0" y="587" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">Molex 5031821852 push-push microSD (marked &#x27;molex 2011EC&#x27;)</text>
+<text x="325.0" y="600" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">SDMMC2 4-bit, 25 MHz; power gated by PC13</text>
+<rect x="700" y="425" width="130" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="765.0" y="442" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">Q_SD</text>
+<text x="705" y="464.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VIN</text>
+<line x1="678" y1="461" x2="700" y2="461" stroke="#b8442c" stroke-width="1.3"/>
+<text x="674" y="464.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">FMU_VDD_3V3</text>
+<text x="705" y="480.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">EN</text>
+<line x1="678" y1="477" x2="700" y2="477" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="674" y="480.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">VDD_3V3_SD_CARD_EN  [PC13]</text>
+<text x="705" y="496.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">GND</text>
+<line x1="678" y1="493" x2="700" y2="493" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="678" y1="493" x2="678" y2="499" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="671" y1="499" x2="685" y2="499" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="673.5" y1="502.5" x2="682.5" y2="502.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="676" y1="506" x2="680" y2="506" stroke="#6b7280" stroke-width="1.3"/>
+<text x="825" y="464.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">VOUT</text>
+<line x1="830" y1="461" x2="852" y2="461" stroke="#b8442c" stroke-width="1.3"/>
+<text x="856" y="464.5" font-size="9.5" fill="#b8442c" text-anchor="start" font-weight="600">VDD_3V3_SD</text>
+<text x="765.0" y="522" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">3.3 V load switch (e.g. TPS22918 / SiP32431)</text>
+<text x="765.0" y="535" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">10k pull-ups on CMD/DAT0-3 to VDD_3V3_SD</text>
+<rect x="700" y="40" width="130" height="68" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="765.0" y="57" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">Y1</text>
+<text x="705" y="79.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">1</text>
+<line x1="678" y1="76" x2="700" y2="76" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="674" y="79.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">16MHZ_IN  [PH0]</text>
+<text x="705" y="95.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">2</text>
+<line x1="678" y1="92" x2="700" y2="92" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="678" y1="92" x2="678" y2="98" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="671" y1="98" x2="685" y2="98" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="673.5" y1="101.5" x2="682.5" y2="101.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="676" y1="105" x2="680" y2="105" stroke="#6b7280" stroke-width="1.3"/>
+<text x="825" y="79.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">3</text>
+<line x1="830" y1="76" x2="852" y2="76" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="856" y="79.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">16MHZ_OUT  [PH1]</text>
+<text x="825" y="95.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">4</text>
+<line x1="830" y1="92" x2="852" y2="92" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="852" y1="92" x2="852" y2="98" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="845" y1="98" x2="859" y2="98" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="847.5" y1="101.5" x2="856.5" y2="101.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="850" y1="105" x2="854" y2="105" stroke="#6b7280" stroke-width="1.3"/>
+<text x="765.0" y="121" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">16.000 MHz, 3225 SMD, CL 8-10 pF</text>
+<text x="765.0" y="134" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">HSE -&gt; PLL1: 480 MHz SYSCLK. 2x 10 pF load caps</text>
+<rect x="700" y="160" width="130" height="52" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="765.0" y="177" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">Y2</text>
+<text x="705" y="199.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">1</text>
+<line x1="678" y1="196" x2="700" y2="196" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="674" y="199.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">32KHZ_IN  [PC14]</text>
+<text x="825" y="199.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">2</text>
+<line x1="830" y1="196" x2="852" y2="196" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="856" y="199.5" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">32KHZ_OUT  [PC15]</text>
+<text x="765.0" y="225" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">32.768 kHz, 2012/3215 SMD, CL 6-7 pF</text>
+<text x="765.0" y="238" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">LSE for RTC. 2x 6.8 pF load caps</text>
+<rect x="700" y="255" width="130" height="52" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="765.0" y="272" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">B1</text>
+<text x="705" y="294.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">+</text>
+<line x1="678" y1="291" x2="700" y2="291" stroke="#b8442c" stroke-width="1.3"/>
+<text x="674" y="294.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">V_RTC_BAT</text>
+<text x="825" y="294.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">-</text>
+<line x1="830" y1="291" x2="852" y2="291" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="852" y1="291" x2="852" y2="297" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="845" y1="297" x2="859" y2="297" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="847.5" y1="300.5" x2="856.5" y2="300.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="850" y1="304" x2="854" y2="304" stroke="#6b7280" stroke-width="1.3"/>
+<text x="765.0" y="320" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">rechargeable Li coin/cyl. cell (marked &#x27;L03&#x27;), e.g. Seiko MS621 / Panasonic ML</text>
+<text x="765.0" y="333" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">keeps RTC + backup SRAM; charged from FMU_VDD_3V3 through D + R</text>
+<text x="700" y="372" font-size="9" fill="#7a828c" text-anchor="start" font-weight="400">V_RTC_BAT -&gt; U1 VBAT and X1-29; charge path: FMU_VDD_3V3 -&gt; BAT54 -&gt; 1k -&gt; V_RTC_BAT</text>
+<rect x="1120" y="40" width="26" height="26" fill="#fff" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1133" y="57" font-size="11" fill="#2b3a4a" text-anchor="middle" font-weight="400">▶|</text>
+<line x1="1080" y1="53" x2="1080" y2="45" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="1074" y1="45" x2="1086" y2="45" stroke="#b8442c" stroke-width="1.8"/>
+<text x="1080" y="41" font-size="9.5" fill="#b8442c" text-anchor="middle" font-weight="600">FMU_VDD_3V3</text>
+<line x1="1080" y1="53" x2="1120" y2="53" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="1146" y1="53" x2="1200" y2="53" stroke="#0b6e4f" stroke-width="1.3"/>
+<rect x="1200" y="48" width="40" height="10" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1220" y="74" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R 470-1k</text>
+<line x1="1240" y1="53" x2="1290" y2="53" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1295" y="57" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">nLED_RED  [PE3]</text>
+<text x="1133" y="80" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">D1 red 0603</text>
+<rect x="1120" y="92" width="26" height="26" fill="#fff" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1133" y="109" font-size="11" fill="#2b3a4a" text-anchor="middle" font-weight="400">▶|</text>
+<line x1="1080" y1="105" x2="1080" y2="97" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="1074" y1="97" x2="1086" y2="97" stroke="#b8442c" stroke-width="1.8"/>
+<text x="1080" y="93" font-size="9.5" fill="#b8442c" text-anchor="middle" font-weight="600">FMU_VDD_3V3</text>
+<line x1="1080" y1="105" x2="1120" y2="105" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="1146" y1="105" x2="1200" y2="105" stroke="#0b6e4f" stroke-width="1.3"/>
+<rect x="1200" y="100" width="40" height="10" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1220" y="126" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R 470-1k</text>
+<line x1="1240" y1="105" x2="1290" y2="105" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1295" y="109" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">nLED_GREEN  [PE4]</text>
+<text x="1133" y="132" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">D2 green 0603</text>
+<rect x="1120" y="144" width="26" height="26" fill="#fff" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1133" y="161" font-size="11" fill="#2b3a4a" text-anchor="middle" font-weight="400">▶|</text>
+<line x1="1080" y1="157" x2="1080" y2="149" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="1074" y1="149" x2="1086" y2="149" stroke="#b8442c" stroke-width="1.8"/>
+<text x="1080" y="145" font-size="9.5" fill="#b8442c" text-anchor="middle" font-weight="600">FMU_VDD_3V3</text>
+<line x1="1080" y1="157" x2="1120" y2="157" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="1146" y1="157" x2="1200" y2="157" stroke="#0b6e4f" stroke-width="1.3"/>
+<rect x="1200" y="152" width="40" height="10" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="1220" y="178" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">R 470-1k</text>
+<line x1="1240" y1="157" x2="1290" y2="157" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1295" y="161" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">nLED_BLUE  [PE5]</text>
+<text x="1133" y="184" font-size="8.5" fill="#7a828c" text-anchor="middle" font-weight="400">D3 blue 0603</text>
+<text x="1080" y="205" font-size="9" fill="#7a828c" text-anchor="start" font-weight="400">open-drain outputs, LED on = pin low. PE3-PE5 double as TRACED0-2.</text>
+<rect x="1120" y="255" width="170" height="84" fill="#f7f5ef" stroke="#2b3a4a" stroke-width="1.4" rx="0"/>
+<text x="1205.0" y="272" font-size="11.5" fill="#2b3a4a" text-anchor="middle" font-weight="700">USB</text>
+<text x="1125" y="294.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">D+</text>
+<line x1="1098" y1="291" x2="1120" y2="291" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1094" y="294.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">USB_D_P  [PA12]</text>
+<text x="1125" y="310.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">D-</text>
+<line x1="1098" y1="307" x2="1120" y2="307" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="1094" y="310.5" font-size="9.5" fill="#0b6e4f" text-anchor="end" font-weight="600">USB_D_N  [PA11]</text>
+<text x="1125" y="326.5" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">VBUS</text>
+<line x1="1098" y1="323" x2="1120" y2="323" stroke="#b8442c" stroke-width="1.3"/>
+<text x="1094" y="326.5" font-size="9.5" fill="#b8442c" text-anchor="end" font-weight="600">VBUS_SENSE  [PA9]</text>
+<text x="1285" y="294.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">→ X1-76</text>
+<text x="1285" y="310.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">→ X1-78</text>
+<text x="1285" y="326.5" font-size="9.5" fill="#1d232b" text-anchor="end" font-weight="400">→ X1-80</text>
+<text x="1205.0" y="352" font-size="9" fill="#1d232b" text-anchor="middle" font-weight="400">OTG_FS via X1 (no connector on module)</text>
+<text x="1205.0" y="365" font-size="9" fill="#7a828c" text-anchor="middle" font-weight="400" font-style="italic">27 ohm series + ESD diodes belong on the base board</text>
+<text x="250" y="640" font-size="12" fill="#2b3a4a" text-anchor="start" font-weight="700" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif">Hardware-ID resistor ladders (read by ADC3 at boot)</text>
+<line x1="310" y1="685" x2="310" y2="677" stroke="#b8442c" stroke-width="1.3"/>
+<line x1="304" y1="677" x2="316" y2="677" stroke="#b8442c" stroke-width="1.8"/>
+<text x="310" y="673" font-size="9.5" fill="#b8442c" text-anchor="middle" font-weight="600">HW_VER_REV_DRIVE [PG0]</text>
+<line x1="310" y1="685" x2="310" y2="710" stroke="#0b6e4f" stroke-width="1.3"/>
+<rect x="300" y="710" width="20" height="40" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="330" y="734" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">R_up 24.9k</text>
+<line x1="310" y1="750" x2="310" y2="790" stroke="#0b6e4f" stroke-width="1.3"/>
+<circle cx="310" cy="770" r="2.2" fill="#0b6e4f"/>
+<line x1="310" y1="770" x2="400" y2="770" stroke="#0b6e4f" stroke-width="1.3"/>
+<text x="405" y="774" font-size="9.5" fill="#0b6e4f" text-anchor="start" font-weight="600">HW_REV_SENSE  [PH4 / ADC3_INP15]  -&gt; FMUM ID</text>
+<rect x="300" y="790" width="20" height="40" fill="#fff" stroke="#2b3a4a" stroke-width="1" rx="0"/>
+<text x="330" y="814" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">R_dn 442k</text>
+<line x1="310" y1="830" x2="310" y2="840" stroke="#0b6e4f" stroke-width="1.3"/>
+<line x1="310" y1="840" x2="310" y2="846" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="303" y1="846" x2="317" y2="846" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="305.5" y1="849.5" x2="314.5" y2="849.5" stroke="#6b7280" stroke-width="1.3"/>
+<line x1="308" y1="853" x2="312" y2="853" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="410" y="790" width="620" height="82" fill="#fffbea" stroke="#a16207" stroke-width="1" rx="0"/>
+<text x="418" y="806" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">ID = 1 -&gt; PX4 &#x27;V6X001&#x27; = CUAV sensor set rev 1.</text>
+<text x="418" y="820" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">Ladder table (R_up/R_dn): 1: 24.9k/442k  2: 32.4k/174k  3: 38.3k/115k  4: 46.4k/84.5k</text>
+<text x="418" y="834" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">5: 51.1k/61.9k  6: 61.9k/51.1k  7: 84.5k/46.4k  8: 115k/38.3k  9: 174k/32.4k  10: 442k/24.9k</text>
+<text x="418" y="848" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">The BASE board carries the same kind of ladder on HW_VER_SENSE (X1-27, PH3); CUAV base = ID 2.</text>
+<text x="418" y="862" font-size="9.5" fill="#5a4300" text-anchor="start" font-weight="400">PG0 is driven high only while sampling, then tri-stated, so the ladders draw nothing at rest.</text>
+<text x="250" y="900" font-size="12" fill="#2b3a4a" text-anchor="start" font-weight="700" font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif">Reset, boot and trace</text>
+<text x="250" y="920" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">BOOT0  -&gt; test pad &#x27;BT0&#x27; (top side) with 10k to GND. Short BT0 to 3.3 V at power-up to enter the ST DFU bootloader.</text>
+<text x="250" y="936" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">NRST   -&gt; X1-87 FMU_nRST, 100 nF to GND. Reset button lives on the base board (ADIO port).</text>
+<text x="250" y="952" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">J1 TRACE (unpopulated 8+2 pad footprint, bottom-left, top side): 1 TRACECLK PE2 · 3 TRACED0 PE3 · 5 TRACED1 PE4 · 7 TRACED2 PE5 · 8 TRACED3 PE6 · GND (PX4 board_config.h, TRACE_PINS)</text>
+<text x="250" y="968" font-size="9.5" fill="#1d232b" text-anchor="start" font-weight="400">SWD (PA13 SWDIO, PA14 SWCLK, PB3 SWO shared with SPI6_SCK) leaves on X1-75/77 and X2-35 to the base &#x27;FMU debug&#x27; JST-SM10B port.</text>
+<text x="250" y="984" font-size="9.5" fill="#7a828c" text-anchor="start" font-weight="400">Test pads seen on the photos: TP1 (bottom), TP2, TP3, TP4, TP7, BT0 (top). Only BT0 is identified with certainty.</text>
+</svg>

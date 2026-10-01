@@ -24,12 +24,20 @@ publications:
     type: px4_msgs::msg::CollisionConstraints
     rate_limit: 50.
 
+  - topic: /fmu/out/estimator_gps_status
+    type: px4_msgs::msg::EstimatorGpsStatus
+    rate_limit: 5.
+
   - topic: /fmu/out/estimator_status_flags
     type: px4_msgs::msg::EstimatorStatusFlags
     rate_limit: 5.
 
   - topic: /fmu/out/failsafe_flags
     type: px4_msgs::msg::FailsafeFlags
+    rate_limit: 5.
+
+  - topic: /fmu/out/input_rc
+    type: px4_msgs::msg::InputRc
     rate_limit: 5.
 
   - topic: /fmu/out/manual_control_setpoint

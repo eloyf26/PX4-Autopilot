@@ -10,3 +10,4 @@ uint64 health_error_flags
 
 uint64 arming_check_warning_flags
 uint64 arming_check_error_flags
+uint64 arming_check_blocking_flags     # flags for each health_component_t with a failed check that prevents arming in the current nav_state

@@ -54,6 +54,7 @@ void Report::getHealthReport(health_report_s &report) const
 
 	report.arming_check_error_flags = (uint64_t)current_results.arming_checks.error;
 	report.arming_check_warning_flags = (uint64_t)current_results.arming_checks.warning;
+	report.arming_check_blocking_flags = (uint64_t)current_results.arming_checks.blocking;
 	report.health_is_present_flags = (uint64_t)current_results.health.is_present;
 	report.health_error_flags = (uint64_t)current_results.health.error;
 	report.health_warning_flags = (uint64_t)current_results.health.warning;
@@ -166,6 +167,7 @@ void Report::healthFailure(NavModes required_modes, HealthComponentIndex compone
 
 	// clear relevant arming bits
 	clearArmingBits(required_modes);
+	setBlocking(required_modes, component);
 }
 
 void Report::armingCheckFailure(NavModes required_modes, HealthComponentIndex component, events::Log log_level)
@@ -182,6 +184,7 @@ void Report::armingCheckFailure(NavModes required_modes, HealthComponentIndex co
 
 	// clear relevant arming bits
 	clearArmingBits(required_modes);
+	setBlocking(required_modes, component);
 }
 
 void Report::clearArmingBits(NavModes modes)
@@ -189,6 +192,14 @@ void Report::clearArmingBits(NavModes modes)
 	ArmingCheckResults &arming_checks = _results[_current_result].arming_checks;
 	NavModes &can_arm = arming_checks.can_arm;
 	can_arm = can_arm & ~modes;
+}
+
+void Report::setBlocking(NavModes required_modes, HealthComponentIndex component)
+{
+	if ((uint32_t)(required_modes & getModeGroup(_nav_state))) {
+		ArmingCheckResults &arming_checks = _results[_current_result].arming_checks;
+		arming_checks.blocking = arming_checks.blocking | (events::px4::enums::health_component_t)(1 << component.index);
+	}
 }
 
 void Report::clearCanRunBits(NavModes modes)
@@ -207,8 +218,10 @@ void Report::reset()
 	_results_changed = false;
 }
 
-void Report::prepare(uint8_t vehicle_type)
+void Report::prepare(uint8_t vehicle_type, uint8_t nav_state)
 {
+	_nav_state = nav_state;
+
 	// Get mode requirements before running any checks (in particular the mode checks require them)
 	mode_util::getModeRequirements(vehicle_type, _failsafe_flags);
 }

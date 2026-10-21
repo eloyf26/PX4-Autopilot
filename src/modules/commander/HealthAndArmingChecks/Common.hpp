@@ -179,6 +179,7 @@ public:
 
 		health_component_t error;
 		health_component_t warning;
+		health_component_t blocking; ///< components with failed checks that prevent arming in the current nav_state
 
 		NavModes can_arm; ///< whether arming is possible for each mode group (bitset)
 		NavModes can_run; ///< whether switching into a certain mode is possible (while armed)
@@ -189,13 +190,14 @@ public:
 		{
 			error = {};
 			warning = {};
+			blocking = {};
 			can_arm = (NavModes) - 1; // bits are cleared for failed checks
 			can_run = (NavModes) - 1;
 			valid = false;
 		}
 		bool operator!=(const ArmingCheckResults &other)
 		{
-			return error != other.error || warning != other.warning ||
+			return error != other.error || warning != other.warning || blocking != other.blocking ||
 			       can_arm != other.can_arm || can_run != other.can_run || valid != other.valid;
 		}
 	};
@@ -325,6 +327,8 @@ private:
 
 	NavModes reportedModes(NavModes required_modes);
 
+	void setBlocking(NavModes required_modes, HealthComponentIndex component);
+
 	NavModes getModeGroup(uint8_t nav_state) const;
 
 	friend class HealthAndArmingChecks;
@@ -345,7 +349,7 @@ private:
 	 * - report() (which can be called independently as well)
 	 */
 	void reset();
-	void prepare(uint8_t vehicle_type);
+	void prepare(uint8_t vehicle_type, uint8_t nav_state);
 	/**
 	 * Called after all checks are run. Returns true if the results changed
 	 */
@@ -375,6 +379,7 @@ private:
 	int _current_result{0};
 
 	failsafe_flags_s &_failsafe_flags;
+	uint8_t _nav_state{0};
 
 	orb_advert_t *_mavlink_log_pub{nullptr}; ///< mavlink log publication for legacy reporting
 };

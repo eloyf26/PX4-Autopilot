@@ -58,7 +58,7 @@ bool HealthAndArmingChecks::update(bool force_reporting, bool is_arming_request)
 	// treat VTOLs in transition mode as fixed-wing - this is not in line with what's published as vehicle_status_s::vehicle_type
 	const uint8_t vehicle_type = _context.status().in_transition_mode ? vehicle_status_s::VEHICLE_TYPE_FIXED_WING :
 				     _context.status().vehicle_type;
-	_reporter.prepare(vehicle_type);
+	_reporter.prepare(vehicle_type, _context.status().nav_state);
 
 	_context.setIsArmingRequest(is_arming_request);
 
@@ -82,7 +82,7 @@ bool HealthAndArmingChecks::update(bool force_reporting, bool is_arming_request)
 		_reporter._mavlink_log_pub = &_mavlink_log_pub;
 		_reporter.reset();
 
-		_reporter.prepare(vehicle_type);
+		_reporter.prepare(vehicle_type, _context.status().nav_state);
 
 		for (unsigned i = 0; i < sizeof(_checks) / sizeof(_checks[0]); ++i) {
 			if (!_checks[i]) {
@@ -96,16 +96,20 @@ bool HealthAndArmingChecks::update(bool force_reporting, bool is_arming_request)
 		_reporter.report(false);
 		_reporter._mavlink_log_pub = nullptr;
 		// LEGACY end
+	}
 
+	const hrt_abstime now = hrt_absolute_time();
+
+	// Publish the health report on change, and once a second for late subscribers (uXRCE-DDS)
+	if (reported || (now > _health_report_timestamp + 1_s)) {
 		health_report_s health_report;
 		_reporter.getHealthReport(health_report);
-		health_report.timestamp = hrt_absolute_time();
+		health_report.timestamp = now;
 		_health_report_pub.publish(health_report);
+		_health_report_timestamp = now;
 	}
 
 	// Check if we need to publish the failsafe flags
-	const hrt_abstime now = hrt_absolute_time();
-
 	if ((now > _failsafe_flags.timestamp + 500_ms) || results_changed) {
 		_failsafe_flags.timestamp = hrt_absolute_time();
 		_failsafe_flags_pub.publish(_failsafe_flags);

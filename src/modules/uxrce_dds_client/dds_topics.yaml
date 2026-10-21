@@ -36,6 +36,10 @@ publications:
     type: px4_msgs::msg::FailsafeFlags
     rate_limit: 5.
 
+  - topic: /fmu/out/health_report
+    type: px4_msgs::msg::HealthReport
+    rate_limit: 5.
+
   - topic: /fmu/out/manual_control_setpoint
     type: px4_msgs::msg::ManualControlSetpoint
     rate_limit: 25.

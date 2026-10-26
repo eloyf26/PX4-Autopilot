@@ -122,6 +122,7 @@ private:
 	orb_advert_t _mavlink_log_pub{nullptr};
 
 	uORB::Publication<health_report_s> _health_report_pub{ORB_ID(health_report)};
+	hrt_abstime _health_report_timestamp{0};
 	uORB::Publication<failsafe_flags_s> _failsafe_flags_pub{ORB_ID(failsafe_flags)};
 
 	// all checks
